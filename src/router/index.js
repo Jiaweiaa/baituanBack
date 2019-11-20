@@ -44,7 +44,7 @@ import Layout from "../views/layout/Layout";
 export const constantRouterMap = [
   {
     path: "/",
-    redirect: "/overview",
+    redirect: "/login",
     hidden: true
   },
   {
