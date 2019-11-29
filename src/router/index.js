@@ -849,7 +849,13 @@ export const constantRouterMap = [
         name: "userWithdrawRecord",
         component: () => import("@/views/distribution/userWithdrawRecord"),
         meta: { title: "用户提现记录", icon: "table", isVisited: true }
-      }
+      },
+      {
+        path: "urbanOperation",
+        name: "urbanOperation",
+        component: () => import("@/views/distribution/urbanOperation"),
+        meta: { title: "城市运营中心", icon: "table", isVisited: true }
+      },
     ]
   },
   // 交易管理

@@ -71,7 +71,7 @@ export const loginAfter = params => {
 // 图片验证码
 export const getImg = params => {
   return request({
-      url: "/basic/auth/code/image",
+    url: "/basic/auth/code/image",
     method: "post",
     data: params,
     headers: {

@@ -8,12 +8,81 @@
 <template>
   <div class="labberConcessionsBox">
     <!--
-         wjw
-    
-         顶部搜索
+     wjw
+  
+     顶部搜索
     -->
-    <div style="margin-bottom:15px;">
-      <searchView :searchModel="searchModel"></searchView>
+    <div>
+      <el-card class="filter-container" shadow="never" style="margin-top:20px;">
+        <div style="margin-bottom: 20px; overflow: hidden; display: flex; align-items: center;">
+          <i class="el-icon-search"></i>
+          <span>筛选搜索</span>
+          <div
+            style="width: calc(100% - 100px); text-align: right; float: right;"
+            :gutter="20">
+            <div style="float: right;margin-right: 10px;">
+              <el-button
+                size="small"
+                type="primary"
+                @click="searchBtn()">搜索</el-button>
+              <el-button
+                  size="small"
+                  type="success"
+                  @click="addBtn()">新增代理</el-button>
+            </div>
+          </div>
+        </div>
+        <el-row :gutter="20" >
+          <el-form :inline="true" class="demo-form-inline">
+            <el-col>
+              <el-form-item label="手机号"   labelWidth="100px">
+                <el-input clearable v-model="searchData.mobile" placeholder="请输入手机号"></el-input>
+              </el-form-item>
+              <el-form-item label="姓名"   labelWidth="100px">
+                <el-input clearable v-model="searchData.realName" placeholder="请输入姓名"></el-input>
+              </el-form-item>
+              <el-form-item label="级别"   labelWidth="100px">
+                <el-select v-model="searchData.level" clearable placeholder="请选择级别">
+                  <el-option
+                      v-for="item in levelOptions"
+                      :key="item.status"
+                      :label="item.name"
+                      :value="item.status">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="状态"   labelWidth="100px">
+                <el-select v-model="searchData.status" clearable placeholder="请选择状态">
+                  <el-option
+                    v-for="item in statusOptions"
+                    :key="item.status"
+                    :label="item.name"
+                    :value="item.status">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="城市中心"   labelWidth="100px">
+                <el-select v-model="searchData.operationCenterId" @clear="clearOperation" @change="operationChange" filterable clearable placeholder="请选择城市中心">
+                  <el-option
+                    v-for="item in centerList"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+                <el-select v-model="searchData.agentId" filterable clearable placeholder="请选择人员">
+                  <el-option
+                    v-for="item in centerPeople"
+                    :key="item.id"
+                    :label="item.realName"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-form>
+        </el-row>
+      </el-card>
     </div>
 
     <!--
@@ -29,7 +98,7 @@
     <!--
       新增代理
     -->
-    <el-dialog title="新增代理" :visible.sync="dialogFormVisible" :before-close="cancelDialog">
+    <el-dialog :title="addTitle" :visible.sync="dialogFormVisible" :before-close="cancelDialog">
       <div style="display:flex;justify-content: center;">
         <el-input style="width:300px;" placeholder="请输入手机号" v-model="userMobile" clearable></el-input>
         <el-button type="primary" @click="searchUser">查询</el-button>
@@ -55,6 +124,16 @@
           <span v-if="dialogForm.status==1">可用</span>
           <span v-else>已被删除</span>
         </el-form-item>
+	      <el-form-item label="选择运营中心" v-if="addTitle == '新增代理'" label-width="160px" prop="operationCenterId">
+		      <el-select v-model="dialogForm.operationCenterId" filterable placeholder="请选择运营中心">
+			      <el-option
+				      v-for="center in centerList"
+				      :key="center.id"
+				      :label="center.name"
+				      :value="center.id">
+			      </el-option>
+		      </el-select>
+	      </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelDialog">取 消</el-button>
@@ -75,7 +154,6 @@
 </template>
 
 <script>
-import searchView from "@/components/searchView/index";
 import CommonTable from "@/components/Table";
 import {
   getRelationShipListPage,
@@ -83,7 +161,9 @@ import {
   addFirstLevel,
   updateRelationshipType,
   addOtherLevel,
-  updateBStoreScore
+  updateBStoreScore,
+  getOperationCenterList,
+  getListByOperationCenterId
 } from "@/api/distribution/index";
 export default {
   name: "name",
@@ -93,73 +173,26 @@ export default {
       userMobile: "",
       userInfo: {},
       leave: 1,
-      // 搜索table渲染的数据
-      searchModel: [
+      
+      levelOptions: [
         {
-          input: [
-            {
-              placeholder: "请输入手机号",
-              inputModel: "mobile",
-              labelName: "手机号",
-              model: "",
-              type: "el-input"
-            },
-            {
-              placeholder: "请输入姓名",
-              inputModel: "realName",
-              labelName: "姓名",
-              model: "",
-              type: "el-input"
-            },
-
-            {
-              placeholder: "请选择级别",
-              inputModel: "level",
-              labelName: "级别",
-              model: "",
-              type: "el-select",
-              options: [
-                {
-                  name: "代理",
-                  status: "1"
-                },
-                {
-                  name: "VIP",
-                  status: "2"
-                }
-                
-              ]
-            },
-            {
-              placeholder: "状态",
-              inputModel: "status",
-              labelName: "状态",
-              model: "",
-              type: "el-select",
-              options: [
-                {
-                  name: "可用",
-                  status: "1"
-                },
-                {
-                  name: "不可用",
-                  status: "3"
-                }
-              ]
-            }
-          ],
-          button: [
-            {
-              type: "success",
-              func: "addBtn",
-              name: "新增代理"
-            },
-            {
-              type: "primary",
-              func: "searchBtn",
-              name: "搜索"
-            }
-          ]
+          name: "代理",
+          status: "1"
+        },
+        {
+          name: "VIP",
+          status: "2"
+        }
+      ],
+  
+      statusOptions: [
+        {
+          name: "可用",
+          status: "1"
+        },
+        {
+          name: "不可用",
+          status: "3"
         }
       ],
 
@@ -260,7 +293,7 @@ export default {
               icon: "el-icon-edit",
               disabled: false,
               onClick: row => {
-                this.del(row);
+                this.add(row);
               }
             },
             {
@@ -299,7 +332,8 @@ export default {
         level: "1",
         memberId: "",
         realName: "",
-        status: "1"
+        status: "1",
+        operationCenterId: ''
       },
       dialogFormRules: {
         mobile: {
@@ -316,9 +350,20 @@ export default {
           required: true,
           message: "请输入工号",
           trigger: "blur"
+        },
+        operationCenterId: {
+          required: true,
+          message: "请选择城市运营中心",
+          trigger: "change"
         }
       },
 
+	    // 新增标题
+      addTitle: '',
+	    // 城市中心列表
+      centerList: [],
+	    centerPeople: [],
+	    
       // 类型
       parentData: "",
       addType: "",
@@ -329,15 +374,46 @@ export default {
       memberScore: "",
       addScoreDialog: false,
       imgSrcBasic: "",
-      articleList: []
+      articleList: [],
+  
+      searchData: {
+        mobile: '',
+        realName: '',
+        level: '',
+        status: '',
+        operationCenterId: '',
+        agentId: ''
+      }
     };
   },
-  created() {},
   components: {
-    searchView,
     CommonTable
   },
+	created() {
+    this.getCenterList();
+	},
   methods: {
+	  // 获取城市运营中心列表
+	  getCenterList() {
+      getOperationCenterList().then(res => {
+        this.centerList = res.result;
+      })
+	  },
+	  // 城市运营中心改变
+    operationChange() {
+      this.centerPeople = [];
+      if(this.searchData.operationCenterId) {
+        getListByOperationCenterId({
+          operationCenterId: this.searchData.operationCenterId
+        }).then(res => {
+          this.centerPeople = res.result;
+        })
+      }
+    },
+    clearOperation() {
+      this.centerPeople = [];
+	    this.searchData.agentId = '';
+    },
     // 编辑新增公共函数
     formFun(val, type) {
       if (type == "add") {
@@ -386,8 +462,7 @@ export default {
       });
       e.cancelBubble = true // 停止冒泡，否则会触发 row-click
     },
-    searchBtn(val) {
-      this.searchData = val;
+    searchBtn() {
       this.getList();
     },
 
@@ -413,6 +488,7 @@ export default {
       this.leave = 1;
       this.addType = 1;
       this.dialogFormVisible = true;
+      this.addTitle = '新增代理';
     },
 
     // 取消新增
@@ -468,7 +544,8 @@ export default {
     },
 
     // 新增子代理
-    del(val) {
+    add(val) {
+      this.addTitle = '新增商家';
       // this.leave =1;
       if (val.level == 2) {
         this.$message.error("该店铺无法添加下级!");

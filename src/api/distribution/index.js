@@ -145,3 +145,53 @@ export const updateRelationshipType = params => {
     },
   });
 };
+
+// 获取城市运营中心列表
+export const getOperationCenterPage = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/basic/OperaCenter/getOperationCenterPage`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+  });
+};
+
+// 新增/编辑运营中心
+export const createOrUpdateOperationCenter = params => {
+  return request({
+    url: `/basic/OperaCenter/createOrUpdateOperationCenter`,
+    method: "post",
+    data: params,
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+};
+
+// 在添加代理用到的运营中心列表
+export const getOperationCenterList = params => {
+  return request({
+    url: `/basic/OperaCenter/getOperationCenterList`,
+    method: "post",
+    data: params,
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+};
+
+// 在添加代理用到的运营中心列表
+export const getListByOperationCenterId = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/basic/memRelationShip/getListByOperationCenterId`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+  });
+};
