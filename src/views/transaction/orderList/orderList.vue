@@ -80,12 +80,12 @@
             @change="handleCheckAllChange"
         >全选</el-checkbox>
         <p style="width: 30%;min-width: 300px;">商品</p>
-        <p style="width: 10%;min-width: 150px;">收货人</p>
-        <p style="width: 20%;min-width: 150px;">收货地址</p>
-        <p style="width: 10%;min-width: 150px;">收货人电话</p>
-        <p style="width: 10%;min-width: 150px;">实付款</p>
-        <p style="width: 10%;min-width: 150px;">交易状态</p>
-        <p style="width: 10%;min-width: 150px;">操作</p>
+        <p style="width: 10%;min-width: 140px;">收货人</p>
+        <p style="width: 20%;min-width: 140px;">收货地址</p>
+        <p style="width: 10%;min-width: 140px;">收货人电话</p>
+        <p style="width: 10%;min-width: 140px;">实付款</p>
+        <p style="width: 10%;min-width: 140px;">交易状态</p>
+        <p style="width: 10%;min-width: 140px;">操作</p>
       </div>
       <div class="contentBox" v-if="tableData.length > 0">
         <el-checkbox-group @change="handleCheckedGoodsChange" v-model="checkGoods">
@@ -904,7 +904,6 @@
             }
             this.allGoods.push(v.code);
           });
-          console.log(this.tableData, "777");
           this.pagination.total = Number(res.result.total);
           this.current = Number(res.result.current);
           this.options.loading = false;
@@ -1048,6 +1047,7 @@
         height: 35px
         line-height: 35px
         font-size: 13px
+        min-width: 1400px
         margin-top: 10px
         margin-bottom: 10px
         p

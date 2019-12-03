@@ -68,7 +68,7 @@
   } from '@/api/rescue/cancellation/index'
 
   export default {
-    name: 'name',
+    name: 'cancellation',
     data() {
       // 验证角色编码
       let validRates = (rule, value, callback) => {

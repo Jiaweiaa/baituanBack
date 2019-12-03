@@ -69,7 +69,7 @@
 	} from '@/api/rescue/maintenance/index'
   
   export default {
-    name: 'name',
+    name: 'maintenance',
     data() {
       return {
         // 搜索table渲染的数据

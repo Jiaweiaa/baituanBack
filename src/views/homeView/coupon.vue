@@ -48,28 +48,28 @@
 					label="库存 | 已发放"
 					align="center">
 				<template slot-scope="scope">
-					<span>{{ scope.row.offerCouponListVo.inventory ? scope.row.offerCouponListVo.inventory  : ''}} | {{ scope.row.offerCouponListVo.inventory - scope.row.offerCouponListVo.availableInventory }}</span>
+					<span>{{ scope.row.offerCouponListVo ? scope.row.offerCouponListVo.inventory  : ''}} | {{ scope.row.offerCouponListVo ? scope.row.offerCouponListVo.inventory: '' -  scope.row.offerCouponListVo ? scope.row.offerCouponListVo.availableInventory : ''}}</span>
 				</template>
 			</el-table-column>
 			<el-table-column
 					label="优惠券类型"
 					align="center">
 				<template slot-scope="scope">
-					<span>{{scope.row.offerCouponListVo.offerCouponType == 1000 ? '微信卡券' : scope.row.offerCouponListVo.offerCouponType == 2000 ? '通用卡券' : scope.row.offerCouponListVo.offerCouponType == 3000 ? '专用卡券' : ''}}</span>
+					<span>{{scope.row.offerCouponListVo  ? (scope.row.offerCouponListVo.offerCouponType == 1000 ? '微信卡券' : scope.row.offerCouponListVo.offerCouponType == 2000 ? '通用卡券' : scope.row.offerCouponListVo.offerCouponType == 3000 ? '专用卡券' : '' ): ''}}</span>
 				</template>
 			</el-table-column>
 			<el-table-column
 					label="商品范围"
 					align="center">
 				<template slot-scope="scope">
-					<span>{{scope.row.offerCouponListVo.isWholeOrder == 1 ? '全部商品' : scope.row.offerCouponListVo.isWholeOrder == 0  ? '指定商品' : ''}}</span>
+					<span>{{scope.row.offerCouponListVo ? (scope.row.offerCouponListVo.isWholeOrder == 1 ? '全部商品' : scope.row.offerCouponListVo.isWholeOrder == 0  ? '指定商品' : '') : ''}}</span>
 				</template>
 			</el-table-column>
 			<el-table-column
 					label="有效期"
 					align="center">
 				<template slot-scope="scope">
-					<span>{{scope.row.offerCouponListVo.startDate}} - {{scope.row.offerCouponListVo.endDate}}</span>
+					<span>{{scope.row.offerCouponListVo ? scope.row.offerCouponListVo.startDate : ''}} - {{scope.row.offerCouponListVo ? scope.row.offerCouponListVo.endDate: ''}}</span>
 				</template>
 			</el-table-column>
 			<el-table-column
@@ -77,8 +77,8 @@
 					align="center">
 				<template slot-scope="scope">
 					<el-tag
-							:type="scope.row.offerCouponListVo.status == 1 ? 'warning' : scope.row.offerCouponListVo.status == 2 ? 'success' : 'danger'">
-						{{scope.row.offerCouponListVo.status == 1 ? '未开始' : scope.row.offerCouponListVo.status == 2 ? '进行中' : '结束'}}
+							:type="scope.row.offerCouponListVo ? (scope.row.offerCouponListVo.status == 1 ? 'warning' : scope.row.offerCouponListVo.status == 2 ? 'success' : 'danger') : ''">
+						{{scope.row.offerCouponListVo ? (scope.row.offerCouponListVo.status == 1 ? '未开始' : scope.row.offerCouponListVo.status == 2 ? '进行中' : '结束') : ''}}
 					</el-tag>
 				</template>
 			</el-table-column>

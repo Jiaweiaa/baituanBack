@@ -234,7 +234,7 @@
 import { orderDetail } from "@/api/transaction/order";
 
 export default {
-  name: "name",
+  name: "orderDetail",
   data() {
     return {
       loading: false,

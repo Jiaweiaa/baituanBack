@@ -33,7 +33,7 @@
   } from '@/api/rescue/advance';
 
   export default {
-    name: 'name',
+    name: 'advance',
     data() {
       return {
         // 搜索table渲染的数据

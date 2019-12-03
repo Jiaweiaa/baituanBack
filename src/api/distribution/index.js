@@ -98,9 +98,9 @@ export const editRatio = params => {
 
 
 //获取佣金记录列表
-export const getMemRelationshipRecordingPage = params => {
+export const getCommisionLogPage = params => {
   return request({
-    url: `/basic/memRelationshipRecording/getMemRelationshipRecordingPage`,
+    url: `/basic/commisionLog/getCommisionLogPage`,
     method: "post",
     data: params,
     headers: {
@@ -112,7 +112,7 @@ export const getMemRelationshipRecordingPage = params => {
 //获取用户提现记录列表
 export const getWithdrawPage = params => {
   return request({
-    url: `/basic/memRelationshipRecording/getWithdrawPage`,
+    url: `/basic/commisionLog/getWithdrawPage`,
     method: "post",
     data: params,
     headers: {
@@ -124,7 +124,7 @@ export const getWithdrawPage = params => {
 export const withdraw2WeChat = params => {
   let data = querystring.encode(params);
   return request({
-    url: `/basic/memRelationshipRecording/withdraw2WeChat`,
+    url: `/basic/commisionLog/withdraw2WeChat`,
     method: "post",
     data: data,
     headers: {
@@ -171,7 +171,7 @@ export const createOrUpdateOperationCenter = params => {
   });
 };
 
-// 在添加代理用到的运营中心列表
+//运营中心列表
 export const getOperationCenterList = params => {
   return request({
     url: `/basic/OperaCenter/getOperationCenterList`,
@@ -183,11 +183,24 @@ export const getOperationCenterList = params => {
   });
 };
 
-// 在添加代理用到的运营中心列表
+// 运营中心列表下的人
 export const getListByOperationCenterId = params => {
   let data = querystring.encode(params);
   return request({
     url: `/basic/memRelationShip/getListByOperationCenterId`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+  });
+};
+
+// 运营中心列表下的人的代理
+export const getListByParentMemberId = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/basic/memRelationShip/getListByParentMemberId`,
     method: "post",
     data: data,
     headers: {

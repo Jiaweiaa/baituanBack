@@ -759,7 +759,7 @@ export const constantRouterMap = [
     path: "/version",
     component: Layout,
     redirect: "/version/versionIndex",
-    name: "resources",
+    name: "versions",
     meta: { title: "版本管理", icon: "example", isVisited: true },
     children: [
       {
@@ -869,13 +869,13 @@ export const constantRouterMap = [
       {
         path: "orderTemplate",
         name: "orderTemplate",
-        redirect: "/transaction/orderTemplate/orderList",
+        redirect: "/transaction/orderTemplate/orderLists",
         meta: { title: "订单", icon: "table", isVisited: true },
         component: () => import("@/views/transaction/orderList/template"),
         children: [
           {
-            path: "orderList",
-            name: "orderList",
+            path: "orderLists",
+            name: "orderLists",
             component: () => import("@/views/transaction/orderList/orderList"),
             meta: { title: "订单列表", icon: "table", isVisited: true }
           },

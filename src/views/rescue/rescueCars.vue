@@ -51,7 +51,7 @@
   } from '@/api/rescue/rescueCars/index'
 
   export default {
-    name: 'name',
+    name: 'rescueCars',
     data() {
       return {
         // 搜索table渲染的数据

@@ -61,7 +61,7 @@
   } from '@/api/rescue/rescueType/index'
 
   export default {
-    name: 'name',
+    name: 'rescueType',
     data() {
       return {
         // 搜索table渲染的数据

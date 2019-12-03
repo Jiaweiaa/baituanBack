@@ -274,9 +274,9 @@ export default {
           ids:Ids
         }
         withdraw2WeChat(params).then((res) => {
-          
+        
         }).catch((err) => {
-          
+        
         });
       }
     },
@@ -289,7 +289,6 @@ export default {
 
     getList() {
       this.options.loading = true;
-      this.options.pageIndex = 1;
       let params = Object.assign(
         {
           pageNum: this.pagination.pageIndex,
@@ -300,11 +299,11 @@ export default {
       getWithdrawPage(params).then(res => {
         this.tableData = res.result.records;
         this.pagination.total = Number(res.result.total);
-        this.current = Number(res.result.current);
         this.options.loading = false;
       });
     },
     searchBtn(val) {
+      this.pagination.pageIndex = 1;
       this.searchData = val;
       this.getList();
     },

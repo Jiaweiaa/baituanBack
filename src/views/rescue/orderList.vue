@@ -31,7 +31,7 @@
   } from '@/api/rescue/telephoneRescue'
   
   export default {
-    name: 'name',
+    name: 'orderList',
     data() {
       return {
         // 搜索table渲染的数据

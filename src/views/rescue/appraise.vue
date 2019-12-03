@@ -64,7 +64,7 @@
   } from '@/api/rescue/appraise/index'
 
   export default {
-    name: 'name',
+    name: 'appraise',
     data() {
       // 验证星级
       let validRates = (rule, value, callback) => {

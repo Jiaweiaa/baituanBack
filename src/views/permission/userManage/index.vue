@@ -469,7 +469,6 @@
         queryUserWithPage(params).then((res) => {
           this.tableData = res.result.records;
           this.pagination.total = Number(res.result.total);
-          this.current = Number(res.result.current);
           this.options.loading = false;
         })
       },

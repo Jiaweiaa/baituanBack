@@ -8,12 +8,75 @@
 <template>
   <div class="labberConcessionsBox">
     <!--
-         wjw
+      wjw
     
-         顶部搜索
-    -->
-    <div style="margin-bottom:15px;">
-      <searchView :searchModel="searchModel"></searchView>
+      顶部搜索
+     -->
+    <div>
+      <el-card class="filter-container" shadow="never" style="margin-top:20px;">
+        <div style="margin-bottom: 20px; overflow: hidden; display: flex; align-items: center;">
+          <i class="el-icon-search"></i>
+          <span>筛选搜索</span>
+          <div
+              style="width: calc(100% - 100px); text-align: right; float: right;"
+              :gutter="20">
+            <div style="float: right;margin-right: 10px;">
+              <el-button
+                  size="small"
+                  type="primary"
+                  @click="searchBtn()">搜索</el-button>
+            </div>
+          </div>
+        </div>
+        <el-row :gutter="20" >
+          <el-form :inline="true" class="demo-form-inline">
+            <el-col>
+              <el-form-item label="手机号"   labelWidth="100px">
+                <el-input clearable v-model="searchData.mobile" placeholder="请输入手机号"></el-input>
+              </el-form-item>
+              <el-form-item label="姓名"   labelWidth="100px">
+                <el-input clearable v-model="searchData.nickname" placeholder="请输入姓名"></el-input>
+              </el-form-item>
+              <el-form-item label="佣金类型"   labelWidth="100px">
+                <el-select v-model="searchData.type" clearable placeholder="请选择级别">
+                  <el-option
+                      v-for="item in typeOption"
+                      :key="item.status"
+                      :label="item.name"
+                      :value="item.status">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="城市中心"   labelWidth="100px">
+                <el-select v-model="searchData.operationCenterId" @clear="clearOperation" @change="operationChange" filterable clearable placeholder="请选择城市中心">
+                  <el-option
+                      v-for="item in centerList"
+                      :key="item.id"
+                      :label="item.name"
+                      :value="item.id">
+                  </el-option>
+                </el-select>
+                <el-select v-model="searchData.agentId"  @clear="clearAgent" @change="agentChange" filterable clearable placeholder="请选择人员">
+                  <el-option
+                      v-for="item in centerPeople"
+                      :key="item.memberId"
+                      :label="item.realName"
+                      :value="item.memberId">
+                  </el-option>
+                </el-select>
+                <el-select v-model="searchData.vipId" filterable clearable placeholder="请选择代理">
+                  <el-option
+                      v-for="item in memberList"
+                      :key="item.memberId"
+                      :label="item.realName"
+                      :value="item.memberId">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-form>
+        </el-row>
+      </el-card>
     </div>
 
     <!--
@@ -56,13 +119,18 @@
 import searchView from "@/components/searchView/index";
 import CommonTable from "@/components/Table";
 import {
-  getMemRelationshipRecordingPage,
+  getCommisionLogPage,
   withdraw2WeChat,
   getMemberInfoByMobile,
   addFirstLevel,
   profitDistributionList,
-  editRatio
+  editRatio,
+  getOperationCenterList,
+  getListByOperationCenterId,
+  getListByParentMemberId
 } from "@/api/distribution/index";
+
+
 export default {
   name: "name",
   data() {
@@ -70,70 +138,37 @@ export default {
       //用户手机号
       userMobile: "",
       userInfo: {},
-      // 搜索table渲染的数据
-      searchModel: [
+  
+      // 城市中心列表
+      centerList: [],
+      centerPeople: [],
+      memberList: [],
+      
+      typeOption: [
         {
-          input: [
-            {
-              placeholder: "请输入手机号",
-              inputModel: "mobile",
-              labelName: "手机号",
-              model: "",
-              type: "el-input"
-            },
-            {
-              placeholder: "请输入昵称",
-              inputModel: "nickname",
-              labelName: "用户",
-              model: "",
-              type: "el-input"
-            },
-
-            {
-              placeholder: "佣金类型",
-              inputModel: "type",
-              labelName: "佣金类型",
-              model: "",
-              type: "el-select",
-              options: [
-                {
-                  name: "到账",
-                  status: "1"
-                },
-                {
-                  name: "未到账",
-                  status: "2"
-                }
-              ]
-            }
-          ],
-          button: [
-            
-            {
-              type: "primary",
-              func: "searchBtn",
-              name: "搜索"
-            }
-          ]
+          name: "已到账",
+          status: "1"
+        },
+        {
+          name: "未到账",
+          status: "2"
+        },
+        {
+          name: "未结算",
+          status: "3"
         }
       ],
+      searchData: {
+        mobile: '',
+        nickname: '',
+        type: '',
+        operationCenterId: '',
+        agentId: '',
+        vipId: ''
+      },
 
       // table和分页的数据
       columns: [
-        {
-          prop: "nickname",
-          label: "用户",
-          render: (row, index) => {
-            return <span> {row.nickname ? row.nickname : "空"}</span>;
-          }
-        },
-        {
-          prop: "mobile",
-          label: "手机",
-          render: (row, index) => {
-            return <span> {row.mobile ? row.mobile : "空"}</span>;
-          }
-        },
         {
           prop: "orderCode",
           label: "订单号",
@@ -142,10 +177,52 @@ export default {
           }
         },
         {
+          prop: "backMemberName",
+          label: "一级返润",
+          render: (row, index) => {
+            return <span> {row.backMemberName ? row.backMemberName : "空"}</span>;
+          }
+        },
+        {
+          prop: "memberMobile",
+          label: "电话",
+          render: (row, index) => {
+            return <span> {row.memberMobile ? row.memberMobile : "空"}</span>;
+          }
+        },
+        {
+          prop: "commision",
+          label: "佣金",
+          render: (row, index) => {
+            return <span> {row.commision ? row.commision : 0}</span>;
+          }
+        },
+        {
+          prop: "backParentName",
+          label: "二级返润",
+          render: (row, index) => {
+            return <span> {row.backParentName ? row.backParentName : "空"}</span>;
+          }
+        },
+        {
+          prop: "parentMobile",
+          label: "电话",
+          render: (row, index) => {
+            return <span> {row.parentMobile ? row.parentMobile : "空"}</span>;
+          }
+        },
+        {
+          prop: "parentCommision",
+          label: "佣金",
+          render: (row, index) => {
+            return <span> {row.parentCommision ? row.parentCommision : 0}</span>;
+          }
+        },
+        {
           prop: "type",
           label: "是否到账",
           render: (row, index) => {
-            return <span> {row.type ? row.type==1?"入账" : "未入账":'未知'}</span>;
+            return <span> {row.type ? row.type==1?"已到账" : row.type == 2 ? "未到账": '未结算' : '未知'}</span>;
           }
         },
         // {
@@ -233,15 +310,58 @@ export default {
       goodsList: null,
 
       imgSrcBasic: "",
-      articleList: []
+      articleList: [],
     };
   },
-  created() {},
+  created() {
+    this.getCenterList();
+  },
   components: {
     searchView,
     CommonTable
   },
   methods: {
+    // 获取城市运营中心列表
+    getCenterList() {
+      getOperationCenterList().then(res => {
+        this.centerList = res.result;
+      })
+    },
+    // 城市运营中心改变
+    operationChange() {
+      this.clearOperation();
+      if(this.searchData.operationCenterId) {
+        getListByOperationCenterId({
+          operationCenterId: this.searchData.operationCenterId
+        }).then(res => {
+          this.centerPeople = res.result;
+        })
+      }
+    },
+    // 根据运营中心改变
+    agentChange() {
+      this.clearAgent();
+      this.searchData.vipId = '';
+      if(this.searchData.agentId) {
+        getListByParentMemberId({
+          parentMemberId: this.searchData.agentId
+        }).then(res => {
+          this.memberList = res.result;
+        })
+      }
+    },
+  
+    clearAgent() {
+      this.memberList = [];
+      this.searchData.vipId = '';
+    },
+    clearOperation() {
+      this.centerPeople = [];
+      this.memberList = [];
+      this.searchData.vipId = '';
+      this.searchData.agentId = '';
+    },
+    
     //一键同意提现
     agreeWithdraw(){
       let Ids = [];
@@ -253,22 +373,20 @@ export default {
           ids:Ids
         }
         withdraw2WeChat(params).then((res) => {
-          
+        
         }).catch((err) => {
-          
+        
         });
       }
     },
     //编辑佣金比例
     editRate(row) {
-
       this.ratioObj = Object.assign({}, row);
       this.ratioVisible = true;
     },
 
     getList() {
       this.options.loading = true;
-      this.options.pageIndex = 1;
       let params = Object.assign(
         {
           pageNum: this.pagination.pageIndex,
@@ -276,15 +394,14 @@ export default {
         },
         this.searchData
       );
-      getMemRelationshipRecordingPage(params).then(res => {
+      getCommisionLogPage(params).then(res => {
         this.tableData = res.result.records;
         this.pagination.total = Number(res.result.total);
-        this.current = Number(res.result.current);
         this.options.loading = false;
       });
     },
-    searchBtn(val) {
-      this.searchData = val;
+    searchBtn() {
+      this.pagination.pageIndex = 1;
       this.getList();
     },
 

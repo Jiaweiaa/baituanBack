@@ -527,6 +527,7 @@
   } from '@/api/rescue/repair'
 
   export default {
+    name: 'repair',
     data() {
       var self = this;
       return {

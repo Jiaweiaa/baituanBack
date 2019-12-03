@@ -73,9 +73,9 @@
                 <el-select v-model="searchData.agentId" filterable clearable placeholder="请选择人员">
                   <el-option
                     v-for="item in centerPeople"
-                    :key="item.id"
+                    :key="item.memberId"
                     :label="item.realName"
-                    :value="item.id">
+                    :value="item.memberId">
                   </el-option>
                 </el-select>
               </el-form-item>
@@ -401,7 +401,7 @@ export default {
 	  },
 	  // 城市运营中心改变
     operationChange() {
-      this.centerPeople = [];
+      this.clearOperation();
       if(this.searchData.operationCenterId) {
         getListByOperationCenterId({
           operationCenterId: this.searchData.operationCenterId
@@ -463,6 +463,7 @@ export default {
       e.cancelBubble = true // 停止冒泡，否则会触发 row-click
     },
     searchBtn() {
+      this.pagination.pageIndex = 1;
       this.getList();
     },
 

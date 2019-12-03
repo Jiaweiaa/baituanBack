@@ -77,7 +77,7 @@
   } from '@/api/rescue/rescueProject/index'
 
   export default {
-    name: 'name',
+    name: 'rescueProject',
     data() {
       return {
         starColors: ['#99A9BF', '#F7BA2A', '#FF9900'],  // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' },

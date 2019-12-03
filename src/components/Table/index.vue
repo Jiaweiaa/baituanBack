@@ -62,6 +62,7 @@
       :total="pagination.total"
       :page-size="pagination.pageSize"
       background
+      :current-page="pagination.pageIndex"
       :page-sizes="[5, 10, 20]"
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="handleSizeChange"
