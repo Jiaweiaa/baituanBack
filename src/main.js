@@ -1,8 +1,16 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-03 11:20:29
+ * @LastEditTime: 2019-12-03 13:33:01
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /shuimu/Users/duang/Desktop/baituanBack/src/main.js
+ */
 import Vue from 'vue'
 import ElSearchTablePagination from 'el-search-table-pagination'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 import '@/styles/index.scss' // global css
 import App from './App'
@@ -10,13 +18,13 @@ import store from './store'
 import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
-import 'element-ui/lib/theme-chalk/index.css';
-import { hasPermission, isShowLabelNum } from "./utils/hasPermission";
-import infiniteScroll from 'vue-infinite-scroll';
+import 'element-ui/lib/theme-chalk/index.css'
+import { hasPermission, isShowLabelNum } from './utils/hasPermission'
+import infiniteScroll from 'vue-infinite-scroll'
 import 'babel-polyfill'
-
 import VueAMap from 'vue-amap'
-
+import VueClipboard from 'vue-clipboard2'  //vue复制到剪切板插件
+Vue.use(VueClipboard)
 
 VueAMap.initAMapApiLoader({
   key: '382aecfb47b3d683b8ba684719a0dde6',
@@ -36,11 +44,11 @@ VueAMap.initAMapApiLoader({
     'AMap.DistrictSearch'
   ],
   v: '1.4.4'
-});
-Vue.use(VueAMap);
+})
+Vue.use(VueAMap)
 setTimeout(() => {
-  localStorage.clear();
-  Vue.use(VueAMap);
+  localStorage.clear()
+  Vue.use(VueAMap)
   // 初始化vue-amap
   VueAMap.initAMapApiLoader({
     key: '382aecfb47b3d683b8ba684719a0dde6',
@@ -60,9 +68,8 @@ setTimeout(() => {
       'AMap.CircleEditor'
     ],
     v: '1.4.4'
-  });
-});
-
+  })
+})
 
 /**
  * This project originally used easy-mock to simulate data,
@@ -73,12 +80,12 @@ setTimeout(() => {
  * If you remove `../mock` it will automatically request easy-mock data.
  */
 
-Vue.prototype.hasPerm = hasPermission;
-Vue.prototype.isShowLabelNum = isShowLabelNum;
-Vue.prototype.imageLibrary = new Vue;
-Vue.use(ElementUI);
-Vue.use(infiniteScroll);
-Vue.use(ElSearchTablePagination);
+Vue.prototype.hasPerm = hasPermission
+Vue.prototype.isShowLabelNum = isShowLabelNum
+Vue.prototype.imageLibrary = new Vue()
+Vue.use(ElementUI)
+Vue.use(infiniteScroll)
+Vue.use(ElSearchTablePagination)
 Vue.config.productionTip = false
 
 new Vue({
@@ -86,9 +93,9 @@ new Vue({
   router,
   store,
   filters: {
-      filterOpening: function (value) {
-        console.log(Value)
-      }
+    filterOpening: function (value) {
+      console.log(Value)
+    }
   },
   render: h => h(App)
 })

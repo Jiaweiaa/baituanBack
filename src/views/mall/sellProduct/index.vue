@@ -76,36 +76,36 @@
         @selection-change="getSelectOption"
       />
     </div>
-	
-	  <!-- 批量定时下架 -->
-	  <el-dialog title="下架时间" :visible.sync="dialogFormVisible" :before-close="cancelDialog">
-		  <el-form :model="dialogForm" status-icon :rules="dialogFormRules" ref="dialogForm">
-			  <el-form-item label="下架时间" label-width="150px" prop="setWarehouseTime">
-				  <el-date-picker
-					  :picker-options="pickerOptions"
-					  v-model="dialogForm.setWarehouseTime"
-					  type="datetime"
-					  placeholder="选择日期时间"
-					  value-format="yyyy-MM-dd HH:mm:ss">
-				  </el-date-picker>
-			  </el-form-item>
-		  </el-form>
-		  <div slot="footer" class="dialog-footer">
-			  <el-button @click="cancelDialog">取 消</el-button>
-			  <el-button type="primary" :loading="btnLoading" @click="dialogClick">确 定</el-button>
-		  </div>
-	  </el-dialog>
+
+    <!-- 批量定时下架 -->
+    <el-dialog title="下架时间" :visible.sync="dialogFormVisible" :before-close="cancelDialog">
+      <el-form :model="dialogForm" status-icon :rules="dialogFormRules" ref="dialogForm">
+        <el-form-item label="下架时间" label-width="150px" prop="setWarehouseTime">
+          <el-date-picker
+            :picker-options="pickerOptions"
+            v-model="dialogForm.setWarehouseTime"
+            type="datetime"
+            placeholder="选择日期时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+          ></el-date-picker>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelDialog">取 消</el-button>
+        <el-button type="primary" :loading="btnLoading" @click="dialogClick">确 定</el-button>
+      </div>
+    </el-dialog>
     <!-- 批量删除及上架 -->
     <div>
       <el-row>
-	      <el-button size="medium" @click="timeGoUp()">批量定时下架</el-button>
+        <el-button size="medium" @click="timeGoUp()">批量定时下架</el-button>
         <el-button size="medium" @click="batchPutaway()">批量下架</el-button>
       </el-row>
     </div>
     <!-- 每件商品的库存列表 -->
     <el-dialog title="查看库存数量" :visible.sync="repertoryDialogVisible" width="70%">
-      <div>商品名称:  {{productInfo.title}}</div>
-      <div>商品编码:  {{productInfo.code}}</div>
+      <div>商品名称: {{productInfo.title}}</div>
+      <div>商品编码: {{productInfo.code}}</div>
       <div>商品规格及对应库存:</div>
       <el-table :data="repertoryTable">
         <el-table-column
@@ -154,7 +154,7 @@
 <script>
 import CommonTable from "@/components/Table";
 import { saleManagement, undercarriageItem } from "@/api/mall/sellProduct";
-import { editItem, timingObtainedItem} from "@/api/mall/newProduct";
+import { editItem, timingObtainedItem } from "@/api/mall/newProduct";
 export default {
   name: "sellProduct1",
   components: {
@@ -167,7 +167,19 @@ export default {
         {
           prop: "code",
           label: "商品编码",
-          width: 160
+          width: 160,
+          render: (row, index) => {
+            return (
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content={row.id}
+                placement="top"
+              >
+                <span>{row.code}</span>
+              </el-tooltip>
+            );
+          }
         },
         {
           prop: "isCoverImageUrl",
@@ -219,6 +231,14 @@ export default {
             //   onClick: row => {}
             // },
             {
+              circle: true,
+              type: "success",
+              icon: "el-icon-document-copy",
+              onClick: row => {
+                this.copyText(row);
+              }
+            },
+            {
               name: "查看库存",
               circle: true,
               type: "primary",
@@ -238,8 +258,7 @@ export default {
                 this.selection.push(row);
                 this.batchPutaway();
               }
-            },
-            
+            }
           ]
         }
       ],
@@ -270,11 +289,13 @@ export default {
       value2: "",
       pickerOptions: {
         disabledDate(time) {
-          return time.getTime() < new Date(new Date().toLocaleDateString()).getTime();
+          return (
+            time.getTime() < new Date(new Date().toLocaleDateString()).getTime()
+          );
         }
       },
       dialogForm: {
-        setWarehouseTime: ''
+        setWarehouseTime: ""
       },
       dialogFormRules: {
         setWarehouseTime: [
@@ -287,10 +308,28 @@ export default {
   mounted() {},
 
   methods: {
+    //复制文本信息
+    copyText(row) {
+      console.log("111");
+      this.$copyText(`/pages/goods/main?id=${row.id}`).then(
+        res => {
+          console.log(res);
+
+          //   this.$message({
+          //   message: '已成功复制，可直接去粘贴',
+          //   type: 'success'
+          // });
+          this.$message.success("已成功复制，可直接去粘贴");
+        },
+        err => {
+          this.$message.error("错了哦，这是一条错误消息");
+        }
+      );
+    },
     // 定时下架取消
     cancelDialog() {
       this.dialogForm = {
-        setWarehouseTime: ''
+        setWarehouseTime: ""
       };
       this.dialogFormVisible = false;
     },
@@ -307,14 +346,14 @@ export default {
           });
           this.btnLoading = true;
           timingObtainedItem(params).then(res => {
-            if(res.code == 200) {
+            if (res.code == 200) {
               this.$message({
                 type: "success",
                 message: "定时下架成功"
               });
               this.cancelDialog();
               this.getData();
-            }else {
+            } else {
               this.$message({
                 type: "error",
                 message: res.message
@@ -327,16 +366,16 @@ export default {
     },
     // 点击定时下架
     timeGoUp() {
-      if(this.selection.length> 0) {
+      if (this.selection.length > 0) {
         this.dialogFormVisible = true;
-      }else {
+      } else {
         this.$message({
           type: "warning",
           message: "请选择上架商品"
         });
       }
     },
-    
+
     /**
      * @获取列表
      */
@@ -361,10 +400,10 @@ export default {
     },
     //查看库存
     createOrEditProduct(item) {
-      this.productInfo ={
-        title:item.title,
-        code:item.code
-      }
+      this.productInfo = {
+        title: item.title,
+        code: item.code
+      };
       const loading = this.$loading({
         lock: true,
         text: "Loading",
