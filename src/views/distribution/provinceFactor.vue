@@ -95,6 +95,7 @@
       :fetch="getList"
       :pagination="pagination"
     />
+    
     <!--
       新增代理
     -->
@@ -140,7 +141,10 @@
         <el-button :loading="btnLoading" type="primary" @click="dialogClick">确 定</el-button>
       </div>
     </el-dialog>
-    <!-- 添加积分 -->
+    
+    <!--
+      添加积分
+    -->
     <el-dialog title="发放补贴金" :visible.sync="addScoreDialog">
       <div style="display:flex;justify-content: center;">
         <el-input style="width:300px;" placeholder="输入补贴金金额" v-model="memberScore" clearable></el-input>
@@ -148,6 +152,47 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="addScoreDialog=false">取 消</el-button>
         <el-button :loading="btnLoading" type="primary" @click="submitAddScore">发放</el-button>
+      </div>
+    </el-dialog>
+  
+    <!--
+       编辑代理
+     -->
+    <el-dialog title="编辑代理" :visible.sync="dialogFormEditVisible" :before-close="cancelDialog">
+      <el-form
+        :model="dialogForm"
+        style="width: 95%; margin: 0 auto;"
+        status-icon
+        :rules="dialogFormRules"
+        ref="dialogForm"
+      >
+        <el-form-item label="分销等级" label-width="160px">
+          <span>{{leave==1?'代理':'VIP'}}</span>
+        </el-form-item>
+        <el-form-item label="手机号" label-width="160px" prop="mobile">
+          <span>{{dialogForm.mobile ? dialogForm.mobile : ''}}</span>
+        </el-form-item>
+        <el-form-item label="真实姓名" label-width="160px" prop="realName">
+          <span>{{dialogForm.realName ? dialogForm.realName: ''}}</span>
+        </el-form-item>
+        <el-form-item label="状态" label-width="160px" prop="status">
+          <span v-if="dialogForm.status==1">可用</span>
+          <span v-else>已被删除</span>
+        </el-form-item>
+        <el-form-item label="选择运营中心"label-width="160px" prop="operationCenterId">
+          <el-select v-model="dialogForm.operationCenterId" filterable placeholder="请选择运营中心">
+            <el-option
+                v-for="center in centerList"
+                :key="center.id"
+                :label="center.name"
+                :value="center.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelDialog">取 消</el-button>
+        <el-button :loading="btnLoading" type="primary" @click="editSubmit">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -159,6 +204,8 @@ import {
   getRelationShipListPage,
   getMemberInfoByMobile,
   addFirstLevel,
+  updateRelationShip,
+  getRelationShipVoById,
   updateRelationshipType,
   addOtherLevel,
   updateBStoreScore,
@@ -166,7 +213,7 @@ import {
   getListByOperationCenterId
 } from "@/api/distribution/index";
 export default {
-  name: "name",
+  name: "provinceFactor",
   data() {
     return {
       //用户手机号
@@ -288,6 +335,14 @@ export default {
           label: "操作",
           group: [
             {
+              name: "编辑",
+              type: "warning",
+              icon: "el-icon-edit",
+              onClick: row => {
+                this.edit(row);
+              }
+            },
+            {
               name: "新增商家",
               type: "success",
               icon: "el-icon-edit",
@@ -309,7 +364,7 @@ export default {
         }
       ],
       tableData: [],
-
+      dialogFormEditVisible: false,
       photoVisible: false,
       photoUrl: "",
 
@@ -445,7 +500,6 @@ export default {
     },
     openStatus(e, row) {
       let inBok = Object.assign({}, row);
-      console.log(inBok)
       let params = {
         memberId: inBok.memberId,
         type: inBok.type
@@ -497,12 +551,14 @@ export default {
       this.goodsList = null;
       this.userMobile = "";
       this.dialogFormVisible = false;
+      this.dialogFormEditVisible = false;
       this.dialogForm = {
         level: "1",
         memberId: "",
         realName: "",
         status: "1"
       };
+      this.$refs['dialogForm'].resetFields();
     },
     // 新增
     dialogClick() {
@@ -588,6 +644,53 @@ export default {
     radioChange(val) {
       this.dialogForm.codes = "";
       this.goodsList = null;
+    },
+    
+    // 编辑
+    edit(row) {
+      getRelationShipVoById({
+        id: row.id
+      }).then(res => {
+        this.dialogForm = res.result;
+        if (this.dialogForm.level == 1) {
+          this.dialogFormEditVisible = true;
+        }else {
+          this.$notify.error({
+            title: '请选择代理编辑',
+            offset: 100
+          });
+        }
+      })
+    },
+    
+    // 编辑提交
+    editSubmit() {
+      this.$refs.dialogForm.validate(valid => {
+        if (valid) {
+          this.btnLoading = true;
+          updateRelationShip(this.dialogForm)
+          .then(res => {
+            if (res.code == 200) {
+              this.cancelDialog();
+              this.$notify.success({
+                title: res.message,
+                offset: 100
+              });
+              this.goodsList = null;
+              this.getList();
+            } else {
+              this.$notify.error({
+                title: res.message,
+                offset: 100
+              });
+            }
+            this.btnLoading = false;
+          })
+          .catch(err => {
+            this.btnLoading = false;
+          });
+        }
+      });
     }
   }
 };

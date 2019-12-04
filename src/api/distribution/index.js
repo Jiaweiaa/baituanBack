@@ -208,3 +208,28 @@ export const getListByParentMemberId = params => {
     },
   });
 };
+
+// 编辑运营中心
+export const getRelationShipVoById = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/basic/memRelationShip/getRelationShipVoById`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+  });
+};
+
+// 保存运营中心
+export const updateRelationShip = params => {
+  return request({
+    url: `/basic/memRelationShip/updateRelationShip`,
+    method: "post",
+    data: params,
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+};
