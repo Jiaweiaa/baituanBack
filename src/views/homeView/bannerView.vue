@@ -60,6 +60,9 @@
 		      </el-radio-group>
 	      </el-form-item>
 	      <div v-if="dialogForm.status == 0 || dialogForm.status == 2">
+		      <el-form-item v-if="dialogForm.status == 2" label="标题" label-width="160px" prop="secondaryName">
+			      <el-input v-model="dialogForm.secondaryName"></el-input>
+		      </el-form-item>
 		      <el-form-item v-if="dialogForm.status == 2" label="页面顶部图" label-width="160px" prop="banners">
 			      <el-upload
 					      class="avatar-uploader"
@@ -69,9 +72,9 @@
 					      :before-upload="beforeUpload"
 			      >
 				      <img
-						      v-if="dialogForm.banners"
-						      :src="`http://qn.gaoshanmall.cn/${dialogForm.banners}?imageMogr2/thumbnail/180x180`"
-						      class="avatar"
+					      v-if="dialogForm.banners"
+					      :src="`http://qn.gaoshanmall.cn/${dialogForm.banners}?imageMogr2/thumbnail/180x180`"
+					      class="avatar"
 				      />
 				      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
 			      </el-upload>
@@ -249,6 +252,7 @@ export default {
         codes: '',
 	      banners: '',
         status: 0,
+        secondaryName: '',
 	      type: 1
       },
       dialogFormRules: {
@@ -260,6 +264,11 @@ export default {
         banners: {
           required: true,
           message: "请上传页面图片",
+          trigger: "blur"
+        },
+        secondaryName: {
+          required: true,
+          message: "请输入标题",
           trigger: "blur"
         },
         status: {
@@ -504,6 +513,7 @@ export default {
 	  // 单选改变
     radioChange() {
       this.dialogForm.banners = '';
+      this.dialogForm.secondaryName = '';
       this.dialogForm.codes = '';
       this.dialogForm.list = [];
       this.dialogForm.itemIds = [];
