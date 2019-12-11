@@ -851,6 +851,12 @@ export const constantRouterMap = [
         meta: { title: "用户提现记录", icon: "table", isVisited: true }
       },
       {
+        path: "qrCode",
+        name: "qrCode",
+        component: () => import("@/views/distribution/qrCode"),
+        meta: { title: "平台二维码", icon: "table", isVisited: true }
+      },
+      {
         path: "urbanOperation",
         name: "urbanOperation",
         component: () => import("@/views/distribution/urbanOperation"),

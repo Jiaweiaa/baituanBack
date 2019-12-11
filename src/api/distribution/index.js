@@ -233,3 +233,28 @@ export const updateRelationShip = params => {
     },
   });
 };
+
+// 获取平台二维码
+export const getBigSendScoreQrCode = params => {
+  return request({
+    url: `/basic/memRelationShip/getBigSendScoreQrCode`,
+    method: "post",
+    data: params,
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+};
+
+// 生成平台二维码
+export const genBigSendScoreQrCode = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/basic/memRelationShip/genBigSendScoreQrCode`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+  });
+};
