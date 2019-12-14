@@ -108,7 +108,7 @@
         实付款:
         <span
           style="font-size: 30px; color: red; margin: 0 10px;"
-        >¥ {{pageData.orderVo.totalActure}}</span>
+        >¥ {{pageData.orderVo.totalActure}}<span style="font-size: 18px;">{{pageData.orderVo.paymentType == 13 ? '+ 补贴金:' + pageData.orderVo.totalScoreActure : ''}}</span></span>
         （含运费{{pageData.orderVo.actualFreight}}元）
       </div>
     </el-card>

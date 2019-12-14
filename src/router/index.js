@@ -779,6 +779,12 @@ export const constantRouterMap = [
     meta: { title: "商城设置", icon: "example", isVisited: true },
     children: [
       {
+        path: "dialogView",
+        name: "dialogView",
+        component: () => import("@/views/homeView/dialogView"),
+        meta: { title: "更新维护提醒", icon: "table", isVisited: true }
+      },
+      {
         path: "homeViewSet",
         name: "homeViewSet",
         component: () => import("@/views/homeView/index"),
