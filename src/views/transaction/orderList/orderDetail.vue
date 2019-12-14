@@ -100,7 +100,7 @@
         <el-table-column align="center" prop="salePrice" label="单价（元）"></el-table-column>
         <el-table-column align="center" prop="quantity" label="数量"></el-table-column>
         <el-table-column align="center" prop="salePrice" label="交易状态">
-          <template slot-scope="scope">{{orderType}}</template>
+          <template slot-scope="scope">{{orderType}}</template>89
         </el-table-column>
         <el-table-column align="center" prop="subTotal" label="商品总价（元）"></el-table-column>
       </el-table>
