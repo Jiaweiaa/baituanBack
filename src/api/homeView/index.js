@@ -252,3 +252,55 @@ export const editCouponDetail = params => {
     },
   });
 };
+
+// 保存公告
+export const saveOrUpdateBulletin = params => {
+  return request({
+    url: `/basic/bulletin/saveOrUpdateBulletin`,
+    method: "post",
+    data: params,
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+};
+
+// 公告列表
+export const getAllBulletin = params => {
+  return request({
+    url: `/basic/bulletin/getAllBulletin`,
+    method: "post",
+    data: params,
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+};
+
+// 公告开关
+export const enableOrDisableBulletin = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/basic/bulletin/enableOrDisableBulletin`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+  });
+};
+
+// 删除公告
+export const deleteBulletin = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/basic/bulletin/deleteBulletin`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+  });
+};
+
+
