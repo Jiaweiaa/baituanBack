@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-18 17:04:46
- * @LastEditTime: 2019-10-16 14:05:05
+ * @LastEditTime: 2019-12-20 15:05:26
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -45,24 +45,16 @@
         </el-select>
       </el-form-item>
       <el-form-item label="采购商家佣金比例：">
-        <el-input v-model="value.item.shopBusRatio" clearable>
-          <template slot="append">%</template>
-        </el-input>
+        <el-input v-model="value.item.shopBusRatio" clearable></el-input>
       </el-form-item>
       <el-form-item label="采购代理佣金比例：">
-        <el-input v-model="value.item.shopDlRatio" clearable>
-          <template slot="append">%</template>
-        </el-input>
+        <el-input v-model="value.item.shopDlRatio" clearable></el-input>
       </el-form-item>
       <el-form-item label="商家佣金比例：">
-        <el-input v-model="value.item.busRatio" clearable>
-          <template slot="append">%</template>
-        </el-input>
+        <el-input v-model="value.item.busRatio" clearable></el-input>
       </el-form-item>
       <el-form-item label="代理佣金比例：">
-        <el-input v-model="value.item.dlRatio" clearable>
-          <template slot="append">%</template>
-        </el-input>
+        <el-input v-model="value.item.dlRatio" clearable></el-input>
       </el-form-item>
 
       <el-form-item label="可以全部积分支付：">
@@ -70,6 +62,16 @@
       </el-form-item>
       <el-form-item label="可以全部购物豆支付：">
         <el-switch v-model="value.item.canPeasPay" active-text="是" inactive-text="否"></el-switch>
+      </el-form-item>
+      <el-form-item label="运费：" prop="postage">
+        <el-input type="number" v-model="value.item.postage" clearable>
+          <template slot="append">元</template>
+        </el-input>
+      </el-form-item>
+      <el-form-item label="返还补贴金：" prop="scoreBack">
+        <el-input v-model="value.item.scoreBack" type="number" clearable>
+          <template slot="append">元</template>
+        </el-input>
       </el-form-item>
       <el-form-item label="原价：" prop="salePrice">
         <el-input v-model="value.item.salePrice" clearable>

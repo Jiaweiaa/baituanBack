@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 16:57:30
- * @LastEditTime: 2019-10-12 16:57:30
- * @LastEditors: your name
+ * @LastEditTime: 2019-12-19 16:12:11
+ * @LastEditors: Please set LastEditors
  -->
 <template>
   <div class="labberConcessionsBox">
@@ -60,7 +60,7 @@
 	      </el-form-item>
 	      <div v-if="dialogForm.status == 0">
 		      <el-form-item label="商品编码" label-width="160px" prop="codes">
-			      <el-input v-model="dialogForm.codes"></el-input>
+			      <el-input @keyup.enter.native="getGoods" v-model="dialogForm.codes"></el-input>
 			      <el-button
 					      style="margin-bottom: 10px;"
 					      type="primary"
@@ -134,6 +134,13 @@ export default {
 
       // table和分页的数据
       columns: [
+        {
+          prop: "title",
+          label: "编码",
+          render: (row, index) => {
+            return <span> {row.itemDto? row.itemDto.code: '' }</span>;
+          }
+        },
         {
           prop: "title",
           label: "名称",

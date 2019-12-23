@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-07-18 17:04:46
- * @LastEditTime: 2019-10-16 14:04:05
+ * @LastEditTime: 2019-12-20 15:01:32
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -109,6 +109,8 @@ export default {
         item: {
           id: "", //商品ID
           categoryNames: "", //分类名称
+          postage:0,//邮费
+          scoreBack:0, //返还补贴金
           sellType:1,
           defaultItemCategoryId: "", //所属分类ID
           itemCategoryIds: [], //分类ID 数组  其实要的是String
@@ -374,6 +376,8 @@ export default {
               this.productParam.item.propertysetName =
                 res.result.propertySetName;
               this.productParam.item.title = res.result.itemDto.title;
+              this.productParam.item.postage = res.result.itemDto.postage;
+              this.productParam.item.scoreBack = res.result.itemDto.scoreBack;
               this.productParam.item.sellType = res.result.itemDto.sellType;
               this.productParam.item.localTitle = res.result.itemDto.title;
               this.productParam.item.code = res.result.itemDto.code;

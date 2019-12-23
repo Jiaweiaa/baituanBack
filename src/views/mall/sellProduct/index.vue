@@ -1,6 +1,6 @@
 <!-- 出售中的商品 -->
 <template>
-  <div class="app-container">
+  <div class="app-container" @keyup.enter="searchData()">
     <el-card class="filter-container" shadow="never" style="margin-top:20px;">
       <div>
         <i class="el-icon-search"></i>

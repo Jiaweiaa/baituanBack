@@ -2,12 +2,12 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 16:57:30
- * @LastEditTime: 2019-10-23 14:51:06
+ * @LastEditTime: 2019-12-19 15:55:25
  * @LastEditors: Please set LastEditors
  -->
 <!-- 仓库中的商品 -->
 <template>
-  <div class="app-container">
+  <div class="app-container" @keyup.enter="searchData()">
     <el-card class="filter-container" shadow="never" style="margin-top:20px;">
       <div>
         <i class="el-icon-search"></i>

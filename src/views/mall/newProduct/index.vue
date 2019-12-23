@@ -1,6 +1,6 @@
 <!-- 新建中的商品 -->
 <template>
-  <div class="app-container">
+  <div class="app-container" @keyup.enter="searchData()">
     <el-card class="filter-container" shadow="never" style="margin-top:20px;">
       <div>
         <i class="el-icon-search"></i>
@@ -17,12 +17,12 @@
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="searchForm" size="small" label-width="140px">
           <el-form-item label="输入商品编码：">
-            <el-input clearable v-model="searchForm.code" style="width: 200px;" class="filter-item"></el-input>
+            <el-input  clearable v-model="searchForm.code" style="width: 200px;" class="filter-item"></el-input>
           </el-form-item>
           <!-- 空label -->
           <el-form-item></el-form-item>
           <el-form-item label="输入商品名称：">
-            <el-input clearable v-model="searchForm.title" style="width: 200px;" class="filter-item"></el-input>
+            <el-input  clearable v-model="searchForm.title" style="width: 200px;" class="filter-item"></el-input>
           </el-form-item>
           <!-- <el-form-item label="选择所属分类：">
             <el-select

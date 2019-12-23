@@ -41,7 +41,7 @@
         ref="dialogForm"
       >
         <el-form-item label="商品编码" label-width="160px" prop="codes">
-          <el-input v-model="dialogForm.codes"></el-input>
+          <el-input @keyup.enter.native="getGoods" v-model="dialogForm.codes"></el-input>
           <el-button
             style="margin-bottom: 10px;"
             type="primary"
@@ -98,6 +98,13 @@ export default {
 
       // table和分页的数据
       columns: [
+        {
+          prop: " code",
+          label: "编码",
+          render: (row, index) => {
+            return (<span> {row.itemDto!=null?row.itemDto.code:""}</span>);
+          }
+        },
         {
           prop: "title",
           label: "标题",

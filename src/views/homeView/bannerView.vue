@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 16:57:30
- * @LastEditTime: 2019-10-12 16:57:30
- * @LastEditors: your name
+ * @LastEditTime: 2019-12-19 15:58:54
+ * @LastEditors: Please set LastEditors
  -->
 <template>
   <div class="labberConcessionsBox">
@@ -28,13 +28,14 @@
     <!--
 			新增banner
     -->
-    <el-dialog title="新增banner" :visible.sync="dialogFormVisible" :before-close="cancelDialog">
+    <el-dialog title="新增banner" :visible.sync="dialogFormVisible" :before-close="cancelDialog" >
       <el-form
         :model="dialogForm"
         style="width: 95%; margin: 0 auto;"
         status-icon
         :rules="dialogFormRules"
         ref="dialogForm"
+        
       >
         <el-form-item label="banner图" label-width="160px" prop="banner">
           <el-upload
@@ -52,66 +53,80 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
-	      <el-form-item label="类型" label-width="160px" prop="status">
-		      <el-radio-group @change="radioChange" v-model="dialogForm.status">
-			      <el-radio :label="0">商品</el-radio>
-			      <el-radio :label="1">专题</el-radio>
-			      <el-radio :label="2">页面</el-radio>
-		      </el-radio-group>
-	      </el-form-item>
-	      <div v-if="dialogForm.status == 0 || dialogForm.status == 2">
-		      <el-form-item v-if="dialogForm.status == 2" label="标题" label-width="160px" prop="secondaryName">
-			      <el-input v-model="dialogForm.secondaryName"></el-input>
-		      </el-form-item>
-		      <el-form-item v-if="dialogForm.status == 2" label="页面顶部图" label-width="160px" prop="banners">
-			      <el-upload
-					      class="avatar-uploader"
-					      :action="imgSrcBasic + '/opc/auth/uploadFile'"
-					      :show-file-list="false"
-					      :on-success="(event) => { handleChange(event, 1)}"
-					      :before-upload="beforeUpload"
-			      >
-				      <img
-					      v-if="dialogForm.banners"
-					      :src="`http://qn.gaoshanmall.cn/${dialogForm.banners}?imageMogr2/thumbnail/180x180`"
-					      class="avatar"
-				      />
-				      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-			      </el-upload>
-		      </el-form-item>
-		      <el-form-item label="商品编码" label-width="160px" prop="codes">
-			      <el-input v-model="dialogForm.codes"></el-input>
-			      <el-button
-				      style="margin-bottom: 10px;"
-				      type="primary"
-				      size="small"
-				      :loading="goodsLoading"
-				      @click="getGoods"
-			      >获取商品</el-button>
-		      </el-form-item>
-		      <el-form-item v-if="goodsList.length > 0" label="商品信息如下" label-width="160px" prop="list">
-			      <el-checkbox-group ref="checkedGoods" v-model="dialogForm.list">
-				      <el-checkbox
-					      v-for="(item, index) in goodsList"
-					      :key="item.id"
-					      :label="item.id"
-					      style="width: 100%; overflow: hidden;"
-				      >{{item.code}}{{item.title}}</el-checkbox>
-			      </el-checkbox-group>
-		      </el-form-item>
-	      </div>
-	      
-	      <!--
+        <el-form-item label="类型" label-width="160px" prop="status">
+          <el-radio-group @change="radioChange" v-model="dialogForm.status">
+            <el-radio :label="0">商品</el-radio>
+            <el-radio :label="1">专题</el-radio>
+            <el-radio :label="2">页面</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <div v-if="dialogForm.status == 0 || dialogForm.status == 2">
+          <el-form-item
+            v-if="dialogForm.status == 2"
+            label="标题"
+            label-width="160px"
+            prop="secondaryName"
+          >
+            <el-input v-model="dialogForm.secondaryName"></el-input>
+          </el-form-item>
+          <el-form-item
+            v-if="dialogForm.status == 2"
+            label="页面顶部图"
+            label-width="160px"
+            prop="banners"
+          >
+            <el-upload
+              class="avatar-uploader"
+              :action="imgSrcBasic + '/opc/auth/uploadFile'"
+              :show-file-list="false"
+              :on-success="(event) => { handleChange(event, 1)}"
+              :before-upload="beforeUpload"
+            >
+              <img
+                v-if="dialogForm.banners"
+                :src="`http://qn.gaoshanmall.cn/${dialogForm.banners}?imageMogr2/thumbnail/180x180`"
+                class="avatar"
+              />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+          <el-form-item label="商品编码" label-width="160px" prop="codes">
+            <el-input @keyup.enter.native="getGoods" v-model="dialogForm.codes"></el-input>
+            <el-button
+              style="margin-bottom: 10px;"
+              type="primary"
+              size="small"
+              :loading="goodsLoading"
+              @click="getGoods"
+            >获取商品</el-button>
+          </el-form-item>
+          <el-form-item v-if="goodsList.length > 0" label="商品信息如下" label-width="160px" prop="list">
+            <el-checkbox-group ref="checkedGoods" v-model="dialogForm.list">
+              <el-checkbox
+                v-for="(item, index) in goodsList"
+                :key="item.id"
+                :label="item.id"
+                style="width: 100%; overflow: hidden;"
+              >{{item.code}}{{item.title}}</el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </div>
+
+        <!--
 	        关联
-	      -->
-	      <div v-else>
-		      <el-form-item label="选择关联专题" label-width="160px" prop="itemId">
-			      <el-radio-group v-model="dialogForm.itemId">
-				      <el-radio style="width: 100%; margin-top: 12px" v-for="(article, index) in articleList" :key="index" :label="article.id">{{article.title}}</el-radio>
-			      </el-radio-group>
-		      </el-form-item>
-	      </div>
-	      
+        -->
+        <div v-else>
+          <el-form-item label="选择关联专题" label-width="160px" prop="itemId">
+            <el-radio-group v-model="dialogForm.itemId">
+              <el-radio
+                style="width: 100%; margin-top: 12px"
+                v-for="(article, index) in articleList"
+                :key="index"
+                :label="article.id"
+              >{{article.title}}</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelDialog">取 消</el-button>
@@ -134,9 +149,7 @@ import {
   saveOrEditBanner,
   deleteBanner
 } from "@/api/homeView/index";
-import {
-  getNewsPage
-} from '@/api/homeView/article/index';
+import { getNewsPage } from "@/api/homeView/article/index";
 
 import { getItemByCode } from "@/api/homeView";
 import { findProductByCodes } from "@/api/promotion/flashSale";
@@ -164,7 +177,16 @@ export default {
           prop: "title",
           label: "名称",
           render: (row, index) => {
-            return <span> {row.itemDto? row.itemDto.title: row.news ? row.news.title : '' }</span>;
+            return (
+              <span>
+                {" "}
+                {row.itemDto
+                  ? row.itemDto.title
+                  : row.news
+                  ? row.news.title
+                  : ""}
+              </span>
+            );
           }
         },
         // {
@@ -178,7 +200,12 @@ export default {
           prop: "status",
           label: "类型",
           render: (row, index) => {
-            return <span> {row.status == 0 ?'商品' : row.status ==  1 ?'专题' :'页面'}</span>;
+            return (
+              <span>
+                {" "}
+                {row.status == 0 ? "商品" : row.status == 1 ? "专题" : "页面"}
+              </span>
+            );
           }
         },
         {
@@ -249,11 +276,11 @@ export default {
         banner: "",
         list: [],
         itemId: "",
-        codes: '',
-	      banners: '',
+        codes: "",
+        banners: "",
         status: 0,
-        secondaryName: '',
-	      type: 1
+        secondaryName: "",
+        type: 1
       },
       dialogFormRules: {
         banner: {
@@ -288,12 +315,12 @@ export default {
       goodsList: [],
 
       imgSrcBasic: "",
-	    articleList: []
+      articleList: []
     };
   },
   created() {
     getNewsPage({
-	    pageSize: 999
+      pageSize: 999
     }).then(res => {
       this.articleList = res.result.records;
     });
@@ -335,9 +362,9 @@ export default {
     // 上传成功提示
     handleChange(response, type) {
       if (response.code == 200) {
-        if(type == 0) {
+        if (type == 0) {
           this.dialogForm.banner = response.result;
-        }else {
+        } else {
           this.dialogForm.banners = response.result;
         }
         this.$notify({
@@ -351,7 +378,7 @@ export default {
     getList() {
       this.options.loading = true;
       getIndexBanner({
-	      type: 1
+        type: 1
       }).then(res => {
         this.tableData = res.result;
         this.options.loading = false;
@@ -366,7 +393,7 @@ export default {
           code: this.dialogForm.codes
         }).then(res => {
           if (res.code == 200) {
-            if(this.dialogForm.status == 0) {
+            if (this.dialogForm.status == 0) {
               this.goodsList = [];
             }
             this.goodsList.push(res.result);
@@ -392,7 +419,7 @@ export default {
       this.options.loading = true;
       let params = {
         id: val.id,
-	      type: 1,
+        type: 1,
         sort: val.sort
       };
       saveOrEditBanner(params)
@@ -427,56 +454,58 @@ export default {
     dialogClick() {
       this.$refs.dialogForm.validate(valid => {
         if (valid) {
-          if(this.dialogForm.status == 0) {
-            if(this.dialogForm.list.length > 0) {
+          if (this.dialogForm.status == 0) {
+            if (this.dialogForm.list.length > 0) {
               this.dialogForm.itemId = this.dialogForm.list[0];
-            }else {
+            } else {
               this.$notify.error({
-                title: '请输入商品编码选择商品',
+                title: "请输入商品编码选择商品",
                 offset: 100
               });
               return;
             }
-          }else if(this.dialogForm.status == 1){
-            if(this.dialogForm.itemId == '') {
+          } else if (this.dialogForm.status == 1) {
+            if (this.dialogForm.itemId == "") {
               this.$notify.error({
-                title: '请选择关联专题',
+                title: "请选择关联专题",
                 offset: 100
               });
               return;
             }
-          }else {
-            if(this.dialogForm.list.length > 0) {
+          } else {
+            if (this.dialogForm.list.length > 0) {
               this.dialogForm.itemIds = this.dialogForm.list;
-            }else {
+            } else {
               this.$notify.error({
-                title: '请输入商品编码选择商品',
+                title: "请输入商品编码选择商品",
                 offset: 100
               });
               return;
             }
           }
           this.btnLoading = true;
-          console.log(this.dialogForm)
-          saveOrEditBanner(this.dialogForm).then(res => {
-            this.btnLoading = false;
-            if (res.code == 200) {
-              this.cancelDialog();
-              this.$notify.success({
-                title: res.message,
-                offset: 100
-              });
-              this.goodsList = [];
-              this.getList();
-            } else {
-              this.$notify.error({
-                title: res.message,
-                offset: 100
-              });
-            }
-          }).catch((err) => {
-            this.btnLoading = false;
-          });
+          console.log(this.dialogForm);
+          saveOrEditBanner(this.dialogForm)
+            .then(res => {
+              this.btnLoading = false;
+              if (res.code == 200) {
+                this.cancelDialog();
+                this.$notify.success({
+                  title: res.message,
+                  offset: 100
+                });
+                this.goodsList = [];
+                this.getList();
+              } else {
+                this.$notify.error({
+                  title: res.message,
+                  offset: 100
+                });
+              }
+            })
+            .catch(err => {
+              this.btnLoading = false;
+            });
         }
       });
     },
@@ -509,18 +538,18 @@ export default {
           });
         });
     },
-	  
-	  // 单选改变
+
+    // 单选改变
     radioChange() {
-      this.dialogForm.banners = '';
-      this.dialogForm.secondaryName = '';
-      this.dialogForm.codes = '';
+      this.dialogForm.banners = "";
+      this.dialogForm.secondaryName = "";
+      this.dialogForm.codes = "";
       this.dialogForm.list = [];
       this.dialogForm.itemIds = [];
-      this.dialogForm.itemId = '';
+      this.dialogForm.itemId = "";
       this.goodsList = [];
       this.$refs["dialogForm"].clearValidate();
-    },
+    }
   }
 };
 </script>
