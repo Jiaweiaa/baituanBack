@@ -1,5 +1,5 @@
 <template>
-	<div class="labberConcessionsBox">
+	<div class="dialogViewBox">
 		<!--
      wjw
 
@@ -25,11 +25,35 @@
 		-->
 		<el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible" :before-close="cancelDialog">
 			<el-form :model="dialogForm" status-icon :rules="dialogFormRules"  ref="dialogForm">
-				<el-form-item label="公告标题" label-width="200px" prop="name">
-					<el-input v-model="dialogForm.name"></el-input>
-				</el-form-item>
-				<el-form-item label="公告内容" label-width="200px" prop="content">
-					<el-input v-model="dialogForm.content"></el-input>
+				<!--<el-form-item label="公告标题" label-width="200px" prop="name">-->
+					<!--<el-input v-model="dialogForm.name"></el-input>-->
+				<!--</el-form-item>-->
+				<!--<el-form-item label="公告内容" label-width="200px" prop="content">-->
+					<!--<el-input v-model="dialogForm.content"></el-input>-->
+				<!--</el-form-item>-->
+				<el-form-item label="公告图片" prop="image" label-width="200px">
+					<el-upload
+							class="avatar-uploader"
+							ref="upload"
+							drag
+							:action="imgSrcBasic + '/opc/auth/uploadFile'"
+							:beforeUpload="beforeUpload"
+							:show-file-list="false"
+							:on-success="handleChange"
+							list-type="picture"
+					>
+						<div slot="tip" class="el-upload__tip">1. 图片单张大小支持2M以下。</div>
+						<div slot="tip" class="el-upload__tip">2.支持的图片格式：jpg、jpeg、png、gif</div>
+						<div slot="tip" class="el-upload__tip">3. 支持将照片拖拽进虚框，单次最多可选300张</div>
+						<div>
+							<img
+									v-if="dialogForm.image!=''"
+									:src="`http://qn.gaoshanmall.cn/${dialogForm.image}`"
+									class="avatar"
+							/>
+							<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+						</div>
+					</el-upload>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -52,6 +76,9 @@
 
   export default {
     name: 'name',
+    mounted() {
+      this.imgSrcBasic = process.env.BASE_API;
+    },
     data() {
       return {
         // 搜索table渲染的数据
@@ -71,13 +98,29 @@
 
         // table和分页的数据
         columns: [
+          // {
+          //   prop: 'name',
+          //   label: '公告标题'
+          // },
+          // {
+          //   prop: 'content',
+          //   label: '公告内容'
+          // },
           {
-            prop: 'name',
-            label: '公告标题'
-          },
-          {
-            prop: 'content',
-            label: '公告内容'
+            showLabel: true,
+            // prop: 'status',
+            label: "公告图片",
+            // render 可以根据你想要渲染的方式渲染
+            // jsx 不提供 v-model 指令，若你想要使用，，推荐使用插件 babel-plugin-jsx-v-model
+            // jsx https://github.com/vuejs/babel-plugin-transform-vue-jsx
+            render: (row, index) => {
+              return (
+                <img
+	              style="width: 50px; height: 50px;"
+	              src={"http://qn.gaoshanmall.cn/" + row.image}
+              />
+            );
+            }
           },
           {
             showLabel: true,
@@ -122,6 +165,7 @@
             }]
           }
         ],
+        typeBok: false,
         tableData: [],
         searchData: {},
         options: {
@@ -135,16 +179,20 @@
         dialogTitle: '',
         // 编辑新增用户
         dialogForm: {
-          name: '',
-          content: ''
+          // name: '',
+          // content: '',
+	        image: ''
         },
         dialogFormRules: {
-          name:[
-            {required: true,  message:'请输入公告标题', trigger: 'blur'},
+          // name:[
+          //   {required: true,  message:'请输入公告标题', trigger: 'blur'},
+          // ],
+	        // content:[
+          //   {required: true,  message:'请输入公告内容', trigger: 'blur'},
+	        // ],
+          image: [
+            {required: true,  message:'请上传图片', trigger: 'blur'},
           ],
-	        content:[
-            {required: true,  message:'请输入公告内容', trigger: 'blur'},
-	        ]
         },
         dialogFormVisible: false
       }
@@ -154,6 +202,45 @@
       CommonTable
     },
     methods: {
+      // 上传限制
+      beforeUpload(file) {
+        const isJPG = file.type === "image/jpeg";
+        const isGIF = file.type === "image/gif";
+        const isPNG = file.type === "image/png";
+        const isBMP = file.type === "image/bmp";
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isJPG && !isGIF && !isPNG && !isBMP) {
+          this.$message({
+            showClose: true,
+            message: "只能上传jpeg,gif,png,bmp,pdf等类型的图片文件",
+            type: "warning"
+          });
+        }
+        if (!isLt2M) {
+          this.$message({
+            showClose: true,
+            message: "图片大小不超过2M",
+            type: "warning"
+          });
+        }
+        if ((isJPG || isBMP || isGIF || isPNG) && isLt2M) {
+          this.typeBok = true;
+        } else {
+          this.typeBok = false;
+        }
+        return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
+      },
+      // 上传成功提示
+      handleChange(response, file) {
+        if (response.code == 200) {
+          this.$notify({
+            title: response.message,
+            type: "success"
+          });
+          this.dialogForm.image = response.result;
+        }
+      },
+      
       getList() {
         getAllBulletin().then((res) => {
           this.tableData = res.result;
@@ -207,6 +294,7 @@
         this.dialogForm =  {
           name: '',
 	        content: '',
+	        image: '',
           status: '0'
         };
         this.$refs['dialogForm'].resetFields();
@@ -274,7 +362,23 @@
 </script>
 
 <style lang="sass">
-	.labberConcessionsBox
+	.avatar-uploader .el-upload
+		border: 1px dashed #d9d9d9
+		border-radius: 6px
+		cursor: pointer
+		position: relative
 		overflow: hidden
-		margin: 20px 20px 0
+	.avatar-uploader .el-upload:hover
+		border-color: #409eff
+	.avatar-uploader-icon
+		font-size: 28px
+		color: #8c939d
+		width: 178px
+		height: 178px
+		line-height: 178px
+		text-align: center
+	.avatar
+		width: 178px
+		height: 178px
+		display: block
 </style>
