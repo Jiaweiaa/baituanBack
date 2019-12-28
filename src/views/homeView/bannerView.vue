@@ -184,7 +184,7 @@ export default {
                   ? row.itemDto.title
                   : row.news
                   ? row.news.title
-                  : ""}
+                  : "二级活动页面"}
               </span>
             );
           }
