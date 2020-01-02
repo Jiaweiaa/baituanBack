@@ -26,7 +26,7 @@
 			<div style="text-align: center;">
 				<img
 					width="360"
-					:src="'http://static.ibaituan.cn/'+photoUrl"
+					:src="'https://static.ibaituan.cn/'+photoUrl"
 					alt="">
 			</div>
 		</el-dialog>

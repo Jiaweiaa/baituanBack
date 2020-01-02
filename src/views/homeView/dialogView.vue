@@ -48,7 +48,7 @@
 						<div>
 							<img
 									v-if="dialogForm.image!=''"
-									:src="`http://static.ibaituan.cn/${dialogForm.image}`"
+									:src="`https://static.ibaituan.cn/${dialogForm.image}`"
 									class="avatar"
 							/>
 							<i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -117,7 +117,7 @@
               return (
                 <img
 	              style="width: 50px; height: 50px;"
-	              src={"http://static.ibaituan.cn/" + row.image}
+	              src={"https://static.ibaituan.cn/" + row.image}
               />
             );
             }

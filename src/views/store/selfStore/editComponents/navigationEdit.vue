@@ -164,7 +164,7 @@
 					<template slot-scope="scope">
 						<img
 							style="width: 50px; height: 50px; cursor: pointer;"
-							:src='"http://static.ibaituan.cn/"+scope.row.img' />
+							:src='"https://static.ibaituan.cn/"+scope.row.img' />
 					</template>
 				</el-table-column>
 				<el-table-column

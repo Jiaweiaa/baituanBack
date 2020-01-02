@@ -80,12 +80,8 @@
         {{pageData.orderVo.shippingAddress.phone }}
       </div>
       <div class="text item">
-        <p>地区:</p>
-        {{pageData.orderVo.shippingAddress.province }}-{{pageData.orderVo.shippingAddress.city }}-{{pageData.orderVo.shippingAddress.district }}
-      </div>
-      <div class="text item">
         <p>地址:</p>
-        {{pageData.orderVo.shippingAddress.address }}
+        {{pageData.orderVo.shippingAddress.province }}-{{pageData.orderVo.shippingAddress.city }}-{{pageData.orderVo.shippingAddress.district }}{{pageData.orderVo.shippingAddress.address }}
       </div>
     </el-card>
     <!-- 商品清单 -->
@@ -98,7 +94,7 @@
           <template slot-scope="scope">
             <el-image
               style="width: 100px; height: 100px; margin-left: 20px;"
-              :src="`http://static.ibaituan.cn/${scope.row.itemImg}`"
+              :src="`https://static.ibaituan.cn/${scope.row.itemImg}`"
               fit="fit"
             ></el-image>
             <span style="margin-left: 10px">{{ scope.row.itemName }}</span>

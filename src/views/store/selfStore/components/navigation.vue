@@ -23,7 +23,7 @@
 					class="image"
 					v-if="dataSource.viewData['22'] == '44'"
 					:class="{isHidden: dataSource.viewData['22'] == '44'}"
-					:src='"http://static.ibaituan.cn/"+item.imgUrl'
+					:src='"https://static.ibaituan.cn/"+item.imgUrl'
 				></el-image>
 				<div
 					:style="{

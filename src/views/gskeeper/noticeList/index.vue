@@ -5,7 +5,7 @@
       <div style="text-align: center;">
         <el-image
                 width="360"
-                :src="'http://static.ibaituan.cn/'+photoUrl"
+                :src="'https://static.ibaituan.cn/'+photoUrl"
                 alt="">
         </el-image>
       </div>
@@ -55,7 +55,7 @@
         <template slot-scope="scope">
           <img @click="lookThis(scope.row.pageImg)"
                style="width: 50px; height: 50px; cursor: pointer;"
-               :src='"http://static.ibaituan.cn/"+scope.row.pageImg' />
+               :src='"https://static.ibaituan.cn/"+scope.row.pageImg' />
         </template>
       </el-table-column>
       <!--
@@ -129,7 +129,7 @@
             :before-upload="beforeUpload">
             <el-image
               v-if="dialogForm.img"
-              :src="`http://static.ibaituan.cn/${dialogForm.img}?imageMogr2/thumbnail/180x180`"
+              :src="`https://static.ibaituan.cn/${dialogForm.img}?imageMogr2/thumbnail/180x180`"
               class="avatar"></el-image>
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
@@ -142,7 +142,7 @@
             :show-file-list="false"
             :on-success="handleChangeS"
             :before-upload="beforeUpload">
-            <img v-if="dialogForm.pageImg" :src="`http://static.ibaituan.cn/${dialogForm.pageImg}?imageMogr2/thumbnail/180x180`" class="avatar">
+            <img v-if="dialogForm.pageImg" :src="`https://static.ibaituan.cn/${dialogForm.pageImg}?imageMogr2/thumbnail/180x180`" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>

@@ -106,7 +106,7 @@
                 >
                   <el-image
                       style="width: 100px; height: 100px; margin-left: 20px;"
-                      :src="`http://static.ibaituan.cn/${childItem.itemImg}`"
+                      :src="`https://static.ibaituan.cn/${childItem.itemImg}`"
                       fit="fit"
                   ></el-image>
                   <div class="floatBox">

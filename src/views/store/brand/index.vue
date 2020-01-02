@@ -45,7 +45,7 @@
               <img
                 v-if="dialogFormVisible"
                 style="width: 50px; height: 50px;"
-                :src="`http://static.ibaituan.cn/${dialogForm.logo}`"
+                :src="`https://static.ibaituan.cn/${dialogForm.logo}`"
                 alt
               >
             </div>
@@ -156,7 +156,7 @@ export default {
             return (
               <img
                 style="width: 50px; height: 50px;"
-                src={"http://static.ibaituan.cn/"+row.logo }
+                src={"https://static.ibaituan.cn/"+row.logo }
               />
             );
           }
