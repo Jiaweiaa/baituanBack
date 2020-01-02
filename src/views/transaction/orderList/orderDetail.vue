@@ -53,6 +53,14 @@
         <p>会员账号:</p>
         {{pageData.memberDto ? pageData.memberDto.loginName : ''}}
       </div>
+      <div class="text item">
+        <p>供应商姓名:</p>
+        {{pageData.supplier ? pageData.supplier.fullName : ''}}
+      </div>
+      <div class="text item">
+        <p>供应商电话:</p>
+        {{pageData.supplier ? pageData.supplier.mobile: '' }}
+      </div>
     </el-card>
     <!-- 收获人信息 -->
     <el-card class="box-card" style="float: right;">
