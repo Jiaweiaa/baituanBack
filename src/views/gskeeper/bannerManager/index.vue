@@ -29,7 +29,7 @@
       <div style="text-align: center;">
         <img
           width="360"
-          :src="'http://qn.gaoshanmall.cn/'+photoUrl"
+          :src="'http://static.ibaituan.cn/'+photoUrl"
           alt="">
       </div>
     </el-dialog>
@@ -62,7 +62,7 @@
             :show-file-list="false"
             :on-success="handleChange"
             :before-upload="beforeUpload">
-            <img v-if="dialogForm.img" :src="`http://qn.gaoshanmall.cn/${dialogForm.img}?imageMogr2/thumbnail/180x180`" class="avatar">
+            <img v-if="dialogForm.img" :src="`http://static.ibaituan.cn/${dialogForm.img}?imageMogr2/thumbnail/180x180`" class="avatar">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -147,7 +147,7 @@
               <img
                 on-click={() => this.lookThis(row.img)}
                 style="width: 50px; height: 50px; cursor: pointer;"
-                src={"http://qn.gaoshanmall.cn/"+row.img}
+                src={"http://static.ibaituan.cn/"+row.img}
               />
             )}
           },

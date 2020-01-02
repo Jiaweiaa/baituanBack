@@ -96,8 +96,8 @@
             <el-input disabled v-model="dialogForm.repairHandleMan"></el-input>
           </el-form-item>
           <el-form-item label="维修照片"  label-width="150px">
-            <el-image style="width: 45%; float: left" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.repairImgOne" lazy></el-image>
-            <el-image style="width: 45%; float: right" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.repairImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: left" :src="'http://static.ibaituan.cn/'+ dialogForm.repairImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: right" :src="'http://static.ibaituan.cn/'+ dialogForm.repairImgOne" lazy></el-image>
           </el-form-item>
 
           <!--<el-form-item label="维修配件费"   label-width="150px" prop="repairPdFee">-->
@@ -171,8 +171,8 @@
             <el-input disabled v-model="dialogForm.rcHandleMan"></el-input>
           </el-form-item>
           <el-form-item label="救援图片"   label-width="150px" prop="rcImgOne">
-            <el-image style="width: 45%; float: left" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.rcImgOne" lazy></el-image>
-            <el-image style="width: 45%; float: right" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.rcImgTwo" lazy></el-image>
+            <el-image style="width: 45%; float: left" :src="'http://static.ibaituan.cn/'+ dialogForm.rcImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: right" :src="'http://static.ibaituan.cn/'+ dialogForm.rcImgTwo" lazy></el-image>
           </el-form-item>
 
           <!--<el-form-item label="救援发生省份"   label-width="150px" prop="rcProvince">-->
@@ -239,8 +239,8 @@
             <el-input disabled v-model="dialogForm.upkeepHandleMan"></el-input>
           </el-form-item>
           <el-form-item label="保养照片"  label-width="150px">
-            <el-image style="width: 45%; float: left" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.upkeepImgOne" lazy></el-image>
-            <el-image style="width: 45%; float: right" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.upkeepImgTwo" lazy></el-image>
+            <el-image style="width: 45%; float: left" :src="'http://static.ibaituan.cn/'+ dialogForm.upkeepImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: right" :src="'http://static.ibaituan.cn/'+ dialogForm.upkeepImgTwo" lazy></el-image>
           </el-form-item>
         </div>
         <el-form-item label="单据总费用"   label-width="150px" prop="billFee">
@@ -335,8 +335,8 @@
             <el-input disabled v-model="dialogForm.repairHandleMan"></el-input>
           </el-form-item>
           <el-form-item label="维修照片"  label-width="150px">
-            <el-image style="width: 45%; float: left" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.repairImgOne" lazy></el-image>
-            <el-image style="width: 45%; float: right" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.repairImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: left" :src="this.GLOBAL.imgUrl+ dialogForm.repairImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: right" :src="this.GLOBAL.imgUrl+ dialogForm.repairImgOne" lazy></el-image>
           </el-form-item>
 
           <!--<el-form-item label="维修配件费"   label-width="150px" prop="repairPdFee">-->
@@ -410,8 +410,8 @@
             <el-input disabled v-model="dialogForm.rcHandleMan"></el-input>
           </el-form-item>
           <el-form-item label="救援图片"   label-width="150px" prop="rcImgOne">
-            <el-image style="width: 45%; float: left" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.rcImgOne" lazy></el-image>
-            <el-image style="width: 45%; float: right" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.rcImgTwo" lazy></el-image>
+            <el-image style="width: 45%; float: left" :src="this.GLOBAL.imgUrl+ dialogForm.rcImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: right" :src="this.GLOBAL.imgUrl+ dialogForm.rcImgTwo" lazy></el-image>
           </el-form-item>
 
           <!--<el-form-item label="救援发生省份"   label-width="150px" prop="rcProvince">-->
@@ -478,8 +478,8 @@
             <el-input disabled v-model="dialogForm.upkeepHandleMan"></el-input>
           </el-form-item>
           <el-form-item label="保养照片"  label-width="150px">
-            <el-image style="width: 45%; float: left" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.upkeepImgOne" lazy></el-image>
-            <el-image style="width: 45%; float: right" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.upkeepImgTwo" lazy></el-image>
+            <el-image style="width: 45%; float: left" :src="this.GLOBAL.imgUrl+ dialogForm.upkeepImgOne" lazy></el-image>
+            <el-image style="width: 45%; float: right" :src="this.GLOBAL.imgUrl+ dialogForm.upkeepImgTwo" lazy></el-image>
           </el-form-item>
         </div>
         <el-form-item label="单据总费用"   label-width="150px" prop="billFee">

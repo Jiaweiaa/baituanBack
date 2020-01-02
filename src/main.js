@@ -24,6 +24,7 @@ import infiniteScroll from 'vue-infinite-scroll'
 import 'babel-polyfill'
 import VueAMap from 'vue-amap'
 import VueClipboard from 'vue-clipboard2'  //vue复制到剪切板插件
+import glovalVariable from './utils/imgUrl';
 Vue.use(VueClipboard)
 
 VueAMap.initAMapApiLoader({
@@ -45,6 +46,7 @@ VueAMap.initAMapApiLoader({
   ],
   v: '1.4.4'
 })
+Vue.prototype.GLOBAL = glovalVariable;
 Vue.use(VueAMap)
 setTimeout(() => {
   localStorage.clear()

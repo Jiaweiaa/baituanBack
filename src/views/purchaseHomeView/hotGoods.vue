@@ -14,7 +14,7 @@
     -->
     <el-dialog id="photoSee" title="照片" :visible.sync="photoVisible">
       <div style="text-align: center;">
-        <img width="360" :src="'http://qn.gaoshanmall.cn/'+photoUrl" alt />
+        <img width="360" :src="'http://static.ibaituan.cn/'+photoUrl" alt />
       </div>
     </el-dialog>
 
@@ -138,7 +138,7 @@ export default {
                 on-click={() => this.lookThis(row)}
                 style="width: 50px; height: 50px; cursor: pointer;"
                 src={row.itemDto!=null?
-                  "http://qn.gaoshanmall.cn/" + row.itemDto.itemImages[0].picUrl:""
+                  "http://static.ibaituan.cn/" + row.itemDto.itemImages[0].picUrl:""
                 }
               />
             );

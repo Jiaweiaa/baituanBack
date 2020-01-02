@@ -21,7 +21,7 @@
     -->
     <el-dialog id="photoSee" title="照片" :visible.sync="photoVisible">
       <div style="text-align: center;">
-        <img width="360" :src="'http://qn.gaoshanmall.cn/'+photoUrl" alt />
+        <img width="360" :src="'http://static.ibaituan.cn/'+photoUrl" alt />
       </div>
     </el-dialog>
 
@@ -47,7 +47,7 @@
           >
             <img
               v-if="dialogForm.banner"
-              :src="`http://qn.gaoshanmall.cn/${dialogForm.banner}?imageMogr2/thumbnail/180x180`"
+              :src="`http://static.ibaituan.cn/${dialogForm.banner}?imageMogr2/thumbnail/180x180`"
               class="avatar"
             />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -84,7 +84,7 @@
             >
               <img
                 v-if="dialogForm.banners"
-                :src="`http://qn.gaoshanmall.cn/${dialogForm.banners}?imageMogr2/thumbnail/180x180`"
+                :src="`http://static.ibaituan.cn/${dialogForm.banners}?imageMogr2/thumbnail/180x180`"
                 class="avatar"
               />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -216,7 +216,7 @@ export default {
               <img
                 on-click={() => this.lookThis(row.banner)}
                 style="width: 50px; height: 50px; cursor: pointer;"
-                src={"http://qn.gaoshanmall.cn/" + row.banner}
+                src={"http://static.ibaituan.cn/" + row.banner}
               />
             );
           }

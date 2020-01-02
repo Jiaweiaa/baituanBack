@@ -33,7 +33,7 @@
           </div>
           <img
             style="width:100px;height:100px;margin-top:10px;"
-            :src="'http://qn.gaoshanmall.cn/'+value.item.iconUrl"
+            :src="this.GLOBAL.imgUrl+value.item.iconUrl"
           />
         </div>
       </el-form-item>
@@ -99,7 +99,7 @@ export default {
 
     return {
       rules: {
-        
+      
       },
       imageLibraryDialog: false, //图片库组件
       hasEditCreated: false

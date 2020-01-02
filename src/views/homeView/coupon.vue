@@ -14,7 +14,7 @@
 		-->
 		<el-dialog id="photoSee" title="照片" :visible.sync="photoVisible">
 			<div style="text-align: center;">
-				<img width="360" :src="'http://qn.gaoshanmall.cn/'+photoUrl" alt />
+				<img width="360" :src="'http://static.ibaituan.cn/'+photoUrl" alt />
 			</div>
 		</el-dialog>
 		

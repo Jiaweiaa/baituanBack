@@ -475,7 +475,7 @@ export default {
         window.tinymce
           .get(`${this.TinymceFlag}Tinymce`)
           .insertContent(
-            `<img class="wscnph" src="http://qn.gaoshanmall.cn/${v.imgUrl}" >`
+            `<img class="wscnph" src="${this.GLOBAL.imgUrl}${v.imgUrl}" >`
           );
       });
     },

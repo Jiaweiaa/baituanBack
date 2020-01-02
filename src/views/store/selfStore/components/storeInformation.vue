@@ -13,7 +13,7 @@
 			class="content">
 			<el-image
 				class="backStyle"
-				:src="'http://qn.gaoshanmall.cn/' + dataSource.viewData['39'].imgUrl"
+				:src="'http://static.ibaituan.cn/' + dataSource.viewData['39'].imgUrl"
 				fit="fill"></el-image>
 			<div
 				:class="

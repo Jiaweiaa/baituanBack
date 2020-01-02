@@ -45,7 +45,7 @@
 					<template  slot-scope="scope">
 						<el-image
 							style="width: 100px; height: 100px"
-							:src="'http://qn.gaoshanmall.cn/'+scope.row.avatar"
+							:src="'http://static.ibaituan.cn/'+scope.row.avatar"
 							fit="fit"></el-image>
 					</template>
 				</el-table-column>

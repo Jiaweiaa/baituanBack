@@ -48,7 +48,7 @@
 						<i @click="deleteGoods(goodsIndex)" class="el-icon-circle-close" style="position: absolute; right: 0; top: 0; z-index: 999; color: #ccc; font-size: 17px; cursor: pointer;"></i>
 						<el-image
 							style="width: 100%; height: 100%"
-							:src='"http://qn.gaoshanmall.cn/"+goodsChild.isCoverImageUrl'>
+							:src='this.GLOBAL.imgUrl+goodsChild.isCoverImageUrl'>
 						</el-image>
 					
 					</div>

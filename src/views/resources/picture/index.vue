@@ -56,7 +56,7 @@
             <div>
               <img
                 v-if="dialogForm.imgUrl!=''"
-                :src="`http://qn.gaoshanmall.cn/${dialogForm.imgUrl}`"
+                :src="`http://static.ibaituan.cn/${dialogForm.imgUrl}`"
                 class="avatar"
               />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -246,7 +246,7 @@ export default {
             return (
               <img
                 style="width: 50px; height: 50px;"
-                src={"http://qn.gaoshanmall.cn/" + row.imgUrl}
+                src={"http://static.ibaituan.cn/" + row.imgUrl}
               />
             );
           }

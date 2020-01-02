@@ -535,7 +535,7 @@ export default {
     },
     // 上传成功提示
     StoreImghandleChange(response, file) {
-      file.url = `http://qn.gaoshanmall.cn/${file.response.result}`;
+      file.url = `http://static.ibaituan.cn/${file.response.result}`;
       if (response.code == 200) {
         this.dialogForm.storePic.push(file);
         this.$notify({
@@ -563,7 +563,7 @@ export default {
     },
     // 证书上传成功提示
     CerthandleChange(response, file) {
-      file.url = `http://qn.gaoshanmall.cn/${file.response.result}`;
+      file.url = `http://static.ibaituan.cn/${file.response.result}`;
       if (response.code == 200) {
         this.dialogForm.cert.push(file);
         this.$notify({

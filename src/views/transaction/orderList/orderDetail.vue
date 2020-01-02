@@ -90,7 +90,7 @@
           <template slot-scope="scope">
             <el-image
               style="width: 100px; height: 100px; margin-left: 20px;"
-              :src="`http://qn.gaoshanmall.cn/${scope.row.itemImg}`"
+              :src="`http://static.ibaituan.cn/${scope.row.itemImg}`"
               fit="fit"
             ></el-image>
             <span style="margin-left: 10px">{{ scope.row.itemName }}</span>

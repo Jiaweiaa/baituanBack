@@ -155,7 +155,7 @@
 					<template slot-scope="scope">
 						<img
 								style="width: 50px; height: 50px; cursor: pointer;"
-								:src='"http://qn.gaoshanmall.cn/"+scope.row.img' />
+								:src='this.GLOBAL.imgUrl+scope.row.img' />
 					</template>
 				</el-table-column>
 				<el-table-column

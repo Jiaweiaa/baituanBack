@@ -189,7 +189,7 @@
               return (
                   <img
               style="width: 50px; height: 50px; cursor: pointer;"
-              src={"http://qn.gaoshanmall.cn/" + row.isCoverImageUrl}
+              src={"http://static.ibaituan.cn/" + row.isCoverImageUrl}
               />
             );
             }

@@ -29,7 +29,7 @@
 						borderRadius: dataSource.viewData[17] == '36' ? '5px' : ''
 					}"
 					style="width: 100%; height: 100%"
-					:src='"http://qn.gaoshanmall.cn/"+item.imgUrl'>
+					:src='this.GLOBAL.imgUrl+item.imgUrl'>
 				</el-image>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 							borderRadius: dataSource.viewData[17] == '36' ? '5px' : ''
 						}"
 						style="width: 100%; height: 100%"
-						:src='"http://qn.gaoshanmall.cn/"+item.imgUrl'>
+						:src='this.GLOBAL.imgUrl+item.imgUrl'>
 					</el-image>
 				</el-carousel-item>
 			</el-carousel>
@@ -79,7 +79,7 @@
 						borderRadius: dataSource.viewData[17] == '36' ? '5px' : ''
 					}"
 						style="width: 100%; height: 100%"
-						:src='"http://qn.gaoshanmall.cn/"+item.imgUrl'>
+						:src='this.GLOBAL.imgUrl+item.imgUrl'>
 				</el-image>
 			</div>
 		</div>

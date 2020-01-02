@@ -57,7 +57,7 @@
 									   dataSource.viewData[7] == '18' && dataSource.viewData[2] == 5 ? '70px': '',
 						}"
 						:fit="dataSource.viewData[8] == '19' ? 'fill' : 'scale-down'"
-						:src='"http://qn.gaoshanmall.cn/"+item.isCoverImageUrl'>
+						:src='this.GLOBAL.imgUrl+item.isCoverImageUrl'>
 					</el-image>
 					<div
 						class="title"
@@ -141,7 +141,7 @@
 								     dataSource.viewData[7] == '17' ? '120px':
 								     dataSource.viewData[7] == '18' ? '120px': ''
 						 }"
-						:src='"http://qn.gaoshanmall.cn/"+item.isCoverImageUrl'></el-image>
+						:src='this.GLOBAL.imgUrl+item.isCoverImageUrl'></el-image>
 					<div
 						class="title"
 						v-show="dataSource.viewData[11].includes('25')"
@@ -234,7 +234,7 @@
 								     dataSource.viewData[7] == '18' && (index%3 +1) == 1 ? '210px': '' ,
 						 }"
 						:fit="dataSource.viewData[8] == '19' ? 'fill' : 'scale-down'"
-						:src='"http://qn.gaoshanmall.cn/"+item.isCoverImageUrl'></el-image>
+						:src='this.GLOBAL.imgUrl+item.isCoverImageUrl'></el-image>
 					<div class="title"
 					     v-show="dataSource.viewData[11].includes('25')"
 					     :style="{
@@ -313,7 +313,7 @@
 								     dataSource.viewData[7] == '17' ? '168px':
 								     dataSource.viewData[7] == '18' ? '71px': ''
 						 }"
-						:src='"http://qn.gaoshanmall.cn/"+item.isCoverImageUrl'></el-image>
+						:src='this.GLOBAL.imgUrl+item.isCoverImageUrl'></el-image>
 					<div
 							class="title"
 							v-show="dataSource.viewData[11].includes('25')"

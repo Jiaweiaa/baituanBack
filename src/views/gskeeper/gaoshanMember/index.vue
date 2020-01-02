@@ -26,7 +26,7 @@
         <div style="text-align: center;">
           <img
             width="360"
-            :src="'http://qn.gaoshanmall.cn/'+photoUrl"
+            :src="this.GLOBAL.imgUrl+photoUrl"
             alt="">
         </div>
 
@@ -139,7 +139,7 @@
                 <img
                   on-click={() => this.lookThis(row.carPosImg)}
                   style="width: 50px; height: 50px; cursor: pointer;"
-                  src={"http://qn.gaoshanmall.cn/"+row.carPosImg }
+                  src={ this.GLOBAL.imgUrl +row.carPosImg }
                 />
               )
             }
@@ -156,7 +156,7 @@
                 <img
                 on-click={() => this.lookThis(row.carNegImg)}
                 style="width: 50px; height: 50px; cursor: pointer;"
-                src={"http://qn.gaoshanmall.cn/"+row.carNegImg}
+                src={this.GLOBAL.imgUrl+row.carNegImg}
                 />
               )
             }

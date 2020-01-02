@@ -33,7 +33,7 @@
 					<div class="imgBox" v-if="dialogForm[39].imgUrl">
 						<el-image
 								style="width: 100px; height: 100px;"
-								:src="'http://qn.gaoshanmall.cn/'+dialogForm[39].imgUrl">
+								:src="this.GLOBAL.imgUrl +dialogForm[39].imgUrl">
 						</el-image>
 					</div>
 				</div>

@@ -31,7 +31,7 @@
 						<i @click="deleteGoodsItem(goodsIndex)" class="closeIcon el-icon-close"></i>
 						<el-image
 								style="width: 100px; height: 100px;"
-								:src="'http://qn.gaoshanmall.cn/'+goodsItem.imgUrl">
+								:src="this.GLOBAL.imgUrl+goodsItem.imgUrl">
 						</el-image>
 						<el-input class="input" size="small" v-model="goodsItem.name" placeholder="商品标题"></el-input>
 						<el-select @change="goodsChange(goodsIndex)" class="select" size="small" v-model="goodsItem.imgType" placeholder="请选择跳转">
@@ -159,7 +159,7 @@
 					<template slot-scope="scope">
 						<img
 				     style="width: 50px; height: 50px; cursor: pointer;"
-				     :src='"http://qn.gaoshanmall.cn/"+scope.row.img' />
+				     :src='this.GLOBAL.imgUrl+scope.row.img' />
 					</template>
 				</el-table-column>
 				<el-table-column

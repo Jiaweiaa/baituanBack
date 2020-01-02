@@ -477,7 +477,7 @@
 							:before-upload="beforeUpload">
 						<img
 							v-if="dialogForm.garageImg"
-							:src="`http://qn.gaoshanmall.cn/${dialogForm.garageImg}`"
+							:src="`http://static.ibaituan.cn/${dialogForm.garageImg}`"
 							class="avatar"
 						/>
 						<i v-else class="el-icon-plus avatar-uploader-icon"></i>

@@ -16,7 +16,7 @@
           >
             <el-image
               v-if="editForm.icon"
-              :src="`http://qn.gaoshanmall.cn/${editForm.icon}?imageMogr2/thumbnail/180x180`"
+              :src="`http://static.ibaituan.cn/${editForm.icon}?imageMogr2/thumbnail/180x180`"
               class="avatar"
             ></el-image>
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>

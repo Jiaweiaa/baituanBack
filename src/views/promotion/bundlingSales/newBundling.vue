@@ -36,7 +36,7 @@
 								<span style="margin-right: 10px;">{{item.imgName}}</span>
 								<img
 									style="width: 30px; height: 40px;padding-top: 10px;"
-									:src="`http://qn.gaoshanmall.cn/${item.imgUrl}`"
+									:src="`${this.GLOBAL.imgUrl}${item.imgUrl}`"
 								/>
 								<i style="float: right; margin-right: 10px;cursor: pointer;" @click="deleteImg(index)" class="el-icon-delete"></i>
 							</p>
@@ -461,7 +461,7 @@
           image.map(v => {
             window.tinymce
               .get("pcTinymce")
-              .insertContent(`<img class="wscnph" src="http://qn.gaoshanmall.cn/${v.imgUrl}" >`);
+              .insertContent(`<img class="wscnph" src="${this.GLOBAL.imgUrl}${v.imgUrl}" >`);
           });
         }
       },

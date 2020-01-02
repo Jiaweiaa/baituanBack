@@ -30,7 +30,7 @@
               <template slot-scope="scope">
                 <img
                   style="width:100px;height:100px;"
-                  :src="`http://qn.gaoshanmall.cn/${scope.row.picUrl}`"
+                  :src="`http://static.ibaituan.cn/${scope.row.picUrl}`"
                 />
               </template>
             </el-table-column>

@@ -56,13 +56,13 @@
           <el-form-item  label="车辆照片1" label-width="200px" prop="carPosImg">
             <el-image
               style="width: 90%;"
-              :src="'http://qn.gaoshanmall.cn/'+ dialogForm.carNegImg">
+              :src="this.GLOBAL.imgUrl+ dialogForm.carNegImg">
             </el-image>
           </el-form-item>
           <el-form-item  label="车辆照片2" label-width="200px" prop="carPosImg">
             <el-image
               style="width: 90%;"
-              :src="'http://qn.gaoshanmall.cn/'+ dialogForm.carPosImg"
+              :src="this.GLOBAL.imgUrl+ dialogForm.carPosImg"
             ></el-image>
           </el-form-item>
           <div style="width: 100%; background: #ccc; height: 1px;"></div>
@@ -116,10 +116,10 @@
             <el-input disabled v-model="dialogForm.createTime"></el-input>
           </el-form-item>
           <el-form-item  label="车辆照片1" label-width="200px" prop="carPosImg">
-            <el-image style="width: 90%;" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.carNegImg" lazy></el-image>
+            <el-image style="width: 90%;" :src="this.GLOBAL.imgUrl+ dialogForm.carNegImg" lazy></el-image>
           </el-form-item>
           <el-form-item  label="车辆照片2" label-width="200px" prop="carPosImg">
-            <el-image style="width: 90%;" :src="'http://qn.gaoshanmall.cn/'+ dialogForm.carPosImg" lazy></el-image>
+            <el-image style="width: 90%;" :src="this.GLOBAL.imgUrl+ dialogForm.carPosImg" lazy></el-image>
           </el-form-item>
           <div v-if="dialogForm.hasGs == 0">
             <el-form-item label="高山会员" label-width="200px" prop="isPass">

@@ -38,7 +38,7 @@
               :show-file-list="false"
               :on-success="handleChange"
               :before-upload="beforeUpload">
-              <img v-if="dialogForm.icon" :src="'http://qn.gaoshanmall.cn/'+dialogForm.icon" class="avatar">
+              <img v-if="dialogForm.icon" :src="'http://static.ibaituan.cn/'+dialogForm.icon" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
@@ -259,7 +259,7 @@
           <div class="custom-tree-node" style="hight: 30px; display: table-cell;text-align: center;  ">
             <img
               style="width: 20px; height: 20px; margin-right: 5px;  vertical-align: middle;"
-              src={"http://qn.gaoshanmall.cn/"+node.icon }
+              src={"http://static.ibaituan.cn/"+node.icon }
             />
             <span>{node.label}</span>
           </div>
