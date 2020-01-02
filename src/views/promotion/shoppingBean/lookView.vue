@@ -147,7 +147,7 @@
         searchData: {},
         pagination: {
           total: 0,
-          pageIndex: 1,
+          page: 1,
           pageSize: 30,
           name: '',
           activeId: ''
@@ -191,7 +191,7 @@
       },
       handleIndexChange(current) {
         // 切换页码
-        this.pagination.pageIndex = current;
+        this.pagination.page = current;
         this.getList();
       },
 

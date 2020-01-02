@@ -22,6 +22,14 @@
         {{pageData.orderVo.code}}
       </div>
       <div class="text item">
+        <p>微信交易号:</p>
+        {{pageData.orderVo.paymentInfos[0].thirdPayNo}}
+      </div>
+      <div class="text item">
+        <p>支付流水号:</p>
+        {{pageData.orderVo.paymentInfos[0].scmSerialNumber}}
+      </div>
+      <div class="text item">
         <p>创建时间:</p>
         {{pageData.orderVo.createTime}}
       </div>
