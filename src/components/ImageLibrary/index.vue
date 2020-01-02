@@ -58,7 +58,7 @@
               <img
                 @click="addSelectImage(item)"
                 style="width: 100px; height: 100px"
-                :src="`http://qn.gaoshanmall.cn/${item.imgUrl}`"
+                :src="`https://static.ibaituan.cn/${item.imgUrl}`"
               />
               <span class="library_imgName">{{item.imgName!=null?item.imgName:''}}</span>
             </div>
@@ -109,7 +109,7 @@
             ></i>
             <img
               style="width: 100px; height: 100px"
-              :src="`http://qn.gaoshanmall.cn/${item.imgUrl}`"
+              :src="`https://static.ibaituan.cn/${item.imgUrl}`"
             />
           </div>
         </el-card>

@@ -133,7 +133,7 @@ export default {
         window.tinymce
           .get(this.tinymceId)
           .insertContent(
-            `<img class="wscnph" src="http://qn.gaoshanmall.cn/${
+            `<img class="wscnph" src="https://static.ibaituan.cn/${
               response.result
             }" >`
           );
