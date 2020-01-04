@@ -122,9 +122,9 @@
                   </div>
                   
                   <div
-                      v-show="childIndex == 0 "
-                      :style="item.orderLines.length > 1 ? 'left: 30%; height:'+ item.orderLines.length + '00%;line-height:'+ item.orderLines.length * 150 + 'px;': 'left: calc(30%);'"
-                      class="itemChildSt"
+                    v-show="childIndex == 0 "
+                    :style="item.orderLines.length > 1 ? 'left: 30%; height:'+ item.orderLines.length + '00%;line-height:'+ item.orderLines.length * 150 + 'px;': 'left: calc(30%);'"
+                    class="itemChildSt"
                   >{{item.shippingAddress? item.shippingAddress.firstName: ''}}</div>
                   <!-- 提货地址 -->
                   <div
@@ -132,7 +132,7 @@
                       style="width: 20%;"
                       :style="item.orderLines.length > 1 ? 'left: 40%; height:'+ item.orderLines.length + '00%;line-height:'+ item.orderLines.length * 150 + 'px;': 'left: calc(40%);'"
                       class="itemChildSt"
-                  >{{item.shippingAddress? item.shippingAddress.address : ''}}</div>
+                  >{{item.shippingAddress? item.shippingAddress.province: ''}}{{item.shippingAddress? item.shippingAddress.city: ''}}{{item.shippingAddress? item.shippingAddress.district: ''}}{{item.shippingAddress? item.shippingAddress.address : ''}}</div>
                   <div
                       v-show="childIndex == 0 "
                       :style="item.orderLines.length > 1 ? 'left: 60%; height:'+ item.orderLines.length + '00%;line-height:'+ item.orderLines.length * 150 + 'px;': 'left: calc(60%);'"
@@ -643,50 +643,6 @@
         ],
         
         // table和分页的数据
-        columns: [
-          {
-            prop: "title",
-            label: "标题"
-          },
-          {
-            prop: "summary",
-            label: "概述"
-          },
-          {
-            prop: "content",
-            label: "内容"
-          },
-          {
-            prop: "createTime",
-            label: "创建时间"
-          },
-          {
-            button: true,
-            label: "操作",
-            group: [
-              {
-                // you can props => type size icon disabled plain
-                name: "编辑",
-                type: "warning",
-                icon: "el-icon-edit",
-                plain: true,
-                onClick: (row, index) => {
-                  // 箭头函数写法的 this 代表 Vue 实例
-                  this.edit(row);
-                }
-              },
-              {
-                name: "删除",
-                type: "danger",
-                icon: "el-icon-delete",
-                disabled: false,
-                onClick: row => {
-                  this.del(row);
-                }
-              }
-            ]
-          }
-        ],
         tableData: [],
         searchData: {},
         pagination: {
@@ -1056,6 +1012,7 @@
           margin: 0
           text-align: center
       .contentBox
+        min-width: 1400px
         .tableHeader
           height: 30px
           line-height: 30px
@@ -1096,4 +1053,10 @@
           text-overflow: ellipsis
           white-space: nowrap
           font-size: 13px
+        .itemChildSt:nth-child(4):hover
+          white-space: normal
+          line-height: 45px!important
+          background-color: #F2F9F9
+          transition-duration: 0.2s
+          transition-timing-function: linear
 </style>
