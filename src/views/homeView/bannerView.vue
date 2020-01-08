@@ -90,6 +90,27 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
+          <el-form-item
+              v-if="dialogForm.status == 2"
+              label="活动规则图"
+              label-width="160px"
+              prop="imgOne"
+          >
+            <el-upload
+                class="avatar-uploader"
+                :action="imgSrcBasic + '/opc/auth/uploadFile'"
+                :show-file-list="false"
+                :on-success="(event) => { handleChange(event, 2)}"
+                :before-upload="beforeUpload"
+            >
+              <img
+                v-if="dialogForm.imgOne"
+                :src="`https://static.ibaituan.cn/${dialogForm.imgOne}?imageMogr2/thumbnail/180x180`"
+                class="avatar"
+              />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
           <el-form-item label="商品编码" label-width="160px" prop="codes">
             <el-input @keyup.enter.native="getGoods" v-model="dialogForm.codes"></el-input>
             <el-button
@@ -278,6 +299,7 @@ export default {
         itemId: "",
         codes: "",
         banners: "",
+        imgOne: "",
         status: 0,
         secondaryName: "",
         type: 1
@@ -291,6 +313,11 @@ export default {
         banners: {
           required: true,
           message: "请上传页面图片",
+          trigger: "blur"
+        },
+        imgOne: {
+          required: true,
+          message: "请上传活动规则图",
           trigger: "blur"
         },
         secondaryName: {
@@ -364,8 +391,10 @@ export default {
       if (response.code == 200) {
         if (type == 0) {
           this.dialogForm.banner = response.result;
-        } else {
+        } else if(type == 1){
           this.dialogForm.banners = response.result;
+        } else {
+          this.dialogForm.imgOne = response.result;
         }
         this.$notify({
           title: response.message,
@@ -484,7 +513,6 @@ export default {
             }
           }
           this.btnLoading = true;
-          console.log(this.dialogForm);
           saveOrEditBanner(this.dialogForm)
             .then(res => {
               this.btnLoading = false;
@@ -541,6 +569,7 @@ export default {
 
     // 单选改变
     radioChange() {
+      this.dialogForm.imgOne = "";
       this.dialogForm.banners = "";
       this.dialogForm.secondaryName = "";
       this.dialogForm.codes = "";
