@@ -92,3 +92,17 @@ export const excleOut = params => {
     }
   });
 };
+
+
+// 获取所有物流公司
+export const getLogisticsCompany = params => {
+  let data = querystring.encode(params);
+  return request({
+    url: `/trade/orderBack/getLogisticsCompany`,
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  });
+};
